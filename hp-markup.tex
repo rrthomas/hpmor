@@ -14,7 +14,7 @@
   \StrSubstitute{\parsselstring}{ß}{sss}[\parssselstring]%
 }
 % N.B. Other commands, such as \emph, cannot be used inside \parsel
-\newcommand\parsel[1]{\parselify{#1}{\ptsansi\parssselstring}}
+\newcommand\parsel[1]{\parselify{\fontspec[ExternalLocation]{Parseltongue.ttf}#1}{\ptsansi\parssselstring}}
 
 % Special types of text
 \newcommand{\abbrev}[1]{\textsc{\MakeLowercase{#1}}\xspace}
