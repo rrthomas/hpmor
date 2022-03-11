@@ -46,10 +46,10 @@
 \newcommand{\authorsnotetext}[1]{\footnotetext{Author’s note: #1}}
 
 % Letters
-\newcommand{\letterAddress}[1]{\pagebreak[1]\noindent{}#1\nopagebreak[4]\par}
-\newcommand{\letterClosing}[2][\vskip 1\baselineskip]{\nopagebreak[4]#1\par\nopagebreak[5]\noindent#2}
+\newcommand{\letterAddress}[1]{\pagebreak[1]\noindent{}\fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}\scriptsize#1\nopagebreak[4]\par}
+\newcommand{\letterClosing}[2][\vskip 1\baselineskip]{\nopagebreak[4]\fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}\scriptsize#1\par\nopagebreak[5]\noindent#2}
 
-\newenvironment{writtenNote}{%
+\newenvironment{writtenNote}{\fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}\scriptsize%
   \renewcommand{\emph}{\uline}
   \vskip 1\baselineskip plus 1\baselineskip minus 1\baselineskip%
   \begin{adjustwidth}{\parindent}{\parindent}%
