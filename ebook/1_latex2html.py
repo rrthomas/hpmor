@@ -614,7 +614,7 @@ def convert_chapter(s: str) -> str:
 
 
 def convert_parsel(s: str) -> str:
-    s = s.replace("ss", "ß").replace("s", "ss").replace("ß", "sss")
+    s = s.replace("ss", "ß").replace("s", "ss").replace("ß", "sss").replace("&nbssp;", "&nbsp;")
     out = f'<span class="parsel">{s}</span>'
     return out
 
