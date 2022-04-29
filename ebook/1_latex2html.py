@@ -231,7 +231,7 @@ def tex2html(s: str) -> str:
             womit = was
             womit = womit.replace("align*", "writtenNote")
             womit = re.sub(r"\\hbox\{(.*?)\}", r"\1", womit)
-            womit = re.sub(r"\\intertext\{(.*?)\}", r"\1", womit, flags=re.DOTALL)
+            womit = re.sub(r"\\intertext\{(.*?)\}", r"\1<br/>", womit, flags=re.DOTALL)
             womit = re.sub(r"\\multicolumn\{2\}\{c\}\{(.*?)\}", r"\1", womit)
             womit = womit.replace("\\scshape", "")
             womit = womit.replace("\\centering", "")
