@@ -234,7 +234,7 @@ def tex2html(s: str) -> str:
             womit = was
             womit = womit.replace("align*", "writtenNote")
             womit = re.sub(r"\\hbox\{(.*?)\}", r"\1", womit)
-            womit = re.sub(r"\\intertext\{(.*?)\}", r"\1", womit, flags=re.DOTALL)
+            womit = re.sub(r"\\intertext\{(.*?)\}", r"\1<br/>", womit, flags=re.DOTALL)
             womit = re.sub(r"\\multicolumn\{2\}\{c\}\{(.*?)\}", r"\1", womit)
             womit = womit.replace("\\scshape", "")
             womit = womit.replace("\\centering", "")
@@ -617,7 +617,9 @@ def convert_chapter(s: str) -> str:
 
 
 def convert_parsel(s: str) -> str:
+    s = s.replace("SS", "ẞ").replace("S", "SS").replace("ẞ", "SSS")
     s = s.replace("ss", "ß").replace("s", "ss").replace("ß", "sss")
+    s = s.replace("&nbssp;", "&nbsp;")
     out = f'<span class="parsel">{s}</span>'
     return out
 
