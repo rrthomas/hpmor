@@ -139,6 +139,9 @@ counter_chapter = 0
 
 
 def simplify_tex(s: str) -> str:
+    # end of line: CRLF-> LF
+    s = s.replace("\r\n", "\n")
+
     # commands to remove
     s = re.sub(
         r"\\lettrine\{(.)\}\{(.*?)\}", r"\1\2", s, flags=re.DOTALL | re.IGNORECASE
@@ -254,7 +257,7 @@ def tex2html(s: str) -> str:
     # notes in chapter 22
     if "The Scientific Method" in s:
         s = re.sub(
-            r"\\begin\{center\}\s*\\itshape\n\{\\scshape (Observation:)\}(.*?)\\end\{center\}",
+            r"\\begin\{center\}\\itshape\n\{\\scshape (Observation:)\}(.*?)\\end\{center\}",
             r"\\begin{writtenNote}\\textsc{\1}\2\\end{writtenNote}",
             s,
             flags=re.DOTALL | re.IGNORECASE,
