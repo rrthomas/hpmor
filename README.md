@@ -4,9 +4,8 @@ https://github.com/rjl20/hpmor
 Maintainer: Reuben Thomas <rrt@sc3d.org>
 
 A LaTeX version of [the popular didactic fan-fiction](http://www.hpmor.com)
-by Eliezer Yudkowsky, which can make a PDF e-book (one file) or printable
-books (either one or six volumes; the latter option is more practical to
-bind). There are also dust jackets for the printable volumes.
+by Eliezer Yudkowsky, which can make e-books in PDF, ePub and Mobi formats,
+and six PDF volumes that can be printed and bound. There are also dust jackets for the printable volumes.
 
 TeXLive 2015 or later and git are required to build the book. (Note: the
 book must be built from a git checkout.)
@@ -33,6 +32,7 @@ and there are no appendices.
   them to GitHub. (Mostly of interest to project maintainers.) `make all`
   does the same as `latexmk` (see below), which may be useful for editor
   integration (e.g. Emacs).
+* `ebook/` - e-book generation scripts
 
 
 ## Building the book(s)
@@ -84,7 +84,7 @@ top directory use the command:
 
 ## Contributing
 
-Contributions are most welcome. These fall into three main categories:
+Contributions are most welcome. These fall into the following categories:
 
 1. Textual corrections (where the text differs from the online original
    unintentionally).
@@ -122,7 +122,8 @@ Exclamations (“Eeeehhhh”) and other one-offs should be added to the per-file
 word lists. (There’s obviously something of a grey area in the middle, e.g.
 one-off references to various real and fictional people.)
 
-Emacs users benefit from a `.dir-locals.el` that automatically sets up `spelling-list.txt` as the personal dictionary for all HPMOR files.
+Emacs users benefit from a `.dir-locals.el` that automatically sets up
+`spelling-list.txt` as the personal dictionary for all HPMOR files.
 
 
 ### Chapter headings
@@ -198,6 +199,8 @@ Note: there are other translations of HPMOR; here are listed only
 translations of this edition.
 
 * [French](https://github.com/yeKcim/hpmor) (in progress)
+
+* [German](https://github.com/entorb/hpmor-de) (just started)
 
 
 <!--  LocalWords:  hpmor tex hp txt latexmkrc latexmk GNUMakefile 80gsm '
