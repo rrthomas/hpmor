@@ -5,7 +5,7 @@ name: Build HPMOR PDFs and eBooks
 on:  
   workflow_dispatch:    
   push: 
-    branches: [ master ]
+    branches: [ github_actions_V2 ]  # TODO: remove branch selection -> master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,29 +22,39 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
       with:
+        ref: github_actions_V2  # TODO: remove branch selection -> master
         persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
         fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+
+    - name: test
+      run: |
+        pwd
+        ls -l
 
     - name: Python setup
       uses: actions/setup-python@v2
       with:
         python-version: '3.9'
-    
-    - name: Install requirements
-      run: install_requirements.sh
 
-# Build
-    - name: Build PDFs
+    - name: Install requirements
+      run: ./install_requirements.sh
+
+    - name: Make PDFs
       run: ./make_pdfs.sh
 
-    - name: Build ebooks
+    - name: test
+      run: |
+        pwd
+        ls -l
+
+    - name: Make eBooks
       run: ./make_ebooks.sh
 
 # Publish to release       
     - name: Upload to release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: MyPrereleaseTag
+        tag_name: WorkInProgress
         prerelease: true
         files: 
           ./*.pdf
