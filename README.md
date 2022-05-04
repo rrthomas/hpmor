@@ -4,7 +4,7 @@ https://github.com/rjl20/hpmor
 Maintainer: Reuben Thomas <rrt@sc3d.org>
 
 A LaTeX version of [the popular didactic fan-fiction](http://www.hpmor.com)
-by Eliezer Yudkowsky, which can make a PDF e-book (one file) or printable
+by Eliezer Yudkowsky, which can make e-books in PDF, ePub and Mobi formats, and printable PDF
 books (either one or six volumes; the latter option is more practical to
 bind). There are also dust jackets for the printable volumes.
 
@@ -33,6 +33,7 @@ and there are no appendices.
   them to GitHub. (Mostly of interest to project maintainers.) `make all`
   does the same as `latexmk` (see below), which may be useful for editor
   integration (e.g. Emacs).
+* `ebook/` - e-book generation scripts
 
 
 ## Building the book(s)
@@ -84,7 +85,7 @@ top directory use the command:
 
 ## Contributing
 
-Contributions are most welcome. These fall into three main categories:
+Contributions are most welcome. These fall into four main categories:
 
 1. Textual corrections (where the text differs from the online original
    unintentionally).
