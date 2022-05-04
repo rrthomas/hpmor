@@ -14,11 +14,21 @@
   \StrSubstitute{\parsselstring}{ß}{sss}[\parssselstring]%
 }
 % N.B. Other commands, such as \emph, cannot be used inside \parsel
-\newcommand\parsel[1]{\parselify{\fontspec[ExternalLocation]{Parseltongue.ttf}#1}{\ptsansi\parssselstring}}
+\newcommand\parsel[1]{{\fontspec[ExternalLocation]{Parseltongue.ttf}#1}{\ptsansi}} % no more \parselify (can’t convert to epub)
+
+
+% TODO: McGonagall Whiteboard (chapter15)
+\newcommand\McGonagallWhiteBoard[1]{
+  \begin{center}
+    \fontspec[ExternalLocation,Color=AA0000]{Automobile Contest.ttf}
+    \textcolor{blue}{\Huge{\underline{\textcolor{red}{#1}}}}
+  \end{center}
+}
+
 
 % Special types of text
 \newcommand{\abbrev}[1]{\textsc{\MakeLowercase{#1}}\xspace}
-\newcommand{\headline}[1]{\begin{center}\textsc{#1}\end{center}}
+\newcommand{\headline}[1]{\begin{center}\textsc{\fontspec[ExternalLocation]{gabriele-bad.ttf}#1}\end{center}}
 
 % Common abbreviations
 \newcommand{\am}{~a.m.\xspace}
@@ -26,17 +36,18 @@
 \newcommand{\SPHEW}{{\abbrev{SPHEW}}}
 
 % Newspaper headlines
-\newcommand{\inlineheadline}[1]{\textsc{#1}}
+\newcommand{\inlineheadline}[1]{\textsc{\fontspec[ExternalLocation]{gabriele-bad.ttf}#1}}
+
 \newenvironment{headlines}{
   \newcommand{\header}[1]{\begin{SingleSpace}\upshape ##1\end{SingleSpace}}
   \let\hmorSavedLabel\label
-  \renewcommand{\label}[1]{{\upshape\itshape ##1}}%
+  \renewcommand{\label}[1]{{\upshape\itshape\begin{flushleft}##1\end{flushleft}}}%
   \begin{Spacing}{0.75}
-  \begin{center}
-  \scshape
-  \nonzeroparskip
-}{
-  \end{center}
+    \begin{center}
+      \scshape
+      \nonzeroparskip
+      }{
+    \end{center}
   \end{Spacing}
   \let\label\hmorSavedLabel
 }
@@ -44,17 +55,18 @@
 % Author’s notes
 % Use with \footnotemark
 \newcommand{\authorsnotetext}[1]{\footnotetext{Author’s note: #1}}
+% TODO
+% \newcommand{\translatorsnotetext}[1]{\footnotetext{Anmerkung des Übersetzers~: #1}}
 
 % Letters
 \newcommand{\letterAddress}[1]{\pagebreak[1]\noindent{}\fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}\scriptsize#1\nopagebreak[4]\par}
 \newcommand{\letterClosing}[2][\vskip 1\baselineskip]{\nopagebreak[4]\fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}\scriptsize#1\par\nopagebreak[5]\noindent#2}
 
 \newenvironment{writtenNote}{\fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}\scriptsize%
-  \renewcommand{\emph}{\uline}
-  \vskip 1\baselineskip plus 1\baselineskip minus 1\baselineskip%
+  \vskip .1\baselineskip plus .1\baselineskip minus .1\baselineskip%
   \begin{adjustwidth}{\parindent}{\parindent}%
     \par\noindent\itshape}
-  {\end{adjustwidth}\vskip 1\baselineskip plus 1\baselineskip minus 1\baselineskip}
+    {\end{adjustwidth}\vskip 1\baselineskip plus 1\baselineskip minus 1\baselineskip}
 
 % Chapter parts
 % \partchapter{The Stanford Prison Experiment}{TSPE}{XIII}{Aftermaths}
@@ -62,24 +74,24 @@
 % Page header: The Stanford Prison Experiment XIII: \\? Aftermaths
 % Title: The Stanford Prison Experiment, Part XIII: \\? Aftermaths
 \newcommand{\namedpartchapter}[5][\relax]{%
-	\chapter[%
-			\texorpdfstring{%
-				\abbrev{#3, part #4}: #5}{%
-				#3, part #4: #5}][%
-			\mbox{#2 #4:} \mbox{#5}]{%
-			#2, Part~#4:\protect\linebreak[1] #5#1}%
+  \chapter[%
+    \texorpdfstring{%
+      \abbrev{#3, part #4}: #5}{%
+      #3, part #4: #5}][%
+    \mbox{#2 #4:} \mbox{#5}]{%
+    #2, Part~#4:\protect\linebreak[1] #5#1}%
 }
 
 \newcommand{\partchapter}[3][\relax]{%
-	\chapter[\texorpdfstring{#2, \abbrev{part #3}}{#2, part #3}]%
-		[#2 #3]{#2, Part~#3#1}}
+  \chapter[\texorpdfstring{#2, \abbrev{part #3}}{#2, part #3}]%
+   [#2 #3]{#2, Part~#3#1}}
 
 % Hanging paras for play scripts (used in Omake IV)
 \newenvironment{playdialog}{\begin{hangparas}{2em}{1}}{\end{hangparas}}
 
 
 % Stars
-		
+
 % Single “magic star” decoration
 \newcommand{\Star}{{\fontspec[ExternalLocation]{Miscelanea.ttf}*}}
 

@@ -1,79 +1,52 @@
 \input{hp-title}
 \ifcover%
-\newpagecolor{black}\afterpage{\restorepagecolor}
-\newcommand\BackgroundPic{
-\put(0,0){%
-\parbox[b][\paperheight]{\paperwidth}{%
-\vfill%
-\centering%
-\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{cover0.jpg}%
-\vfill%
-}}}\AddToShipoutPicture*{\BackgroundPic}%
-\AddToShipoutPicture*{\put(0,0){%
-\parbox[b][\paperheight]{\paperwidth}{%
-\hptitle{\fullvolumetitle{\volumenumber}}%
-}}}%
-\ %
-\cleartorecto
+    \definecolor{backgroundcover}{HTML}{272c36}
+    \newpagecolor{backgroundcover}\afterpage{\restorepagecolor}
+    \newcommand\BackgroundPic{
+        \put(0,0){%
+            \parbox[b][\paperheight]{\paperwidth}{%
+                \vfill%
+                \centering%
+                \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{cover1.pdf}%
+                \vfill%
+            }}}\AddToShipoutPicture*{\BackgroundPic}%
+    \AddToShipoutPicture*{\put(0,0){%
+            \parbox[b][\paperheight]{\paperwidth}{%
+                \hptitle{\fullvolumetitle{\volumenumber}}%
+            }}}%
+    \ %
+    \cleartorecto
 \fi
 \begin{center}
-\thispagestyle{empty}
-{\hpfont
-\Huge\MakeUppercase{Harry Potter}\vspace*{0.5cm}
+    \thispagestyle{empty}
+    {\hpfont
+        \Huge\MakeUppercase{Harry Potter}\vspace*{0.5cm}
 
-\Large\MakeUppercase{and the Methods of Rationality} %
+        \Large\MakeUppercase{and the Methods of Rationality} %
 
-\includegraphics[scale=0.5]{bubble0.png}
+        \includegraphics[scale=0.5]{bubble.pdf}
 
-\Large BY \vspace*{.25cm}
+        \Large Fanfiction by \vspace*{.25cm}
 
-\huge \MakeUppercase{Eliezer Yudkowsky}%
+        \huge \MakeUppercase{Eliezer Yudkowsky}%
 
-\normalsize
+        \normalsize
 
-\vspace*{1\baselineskip}
-\fullvolumetitle{\volumenumber}
-}
+        \vspace*{1\baselineskip}
+        \fullvolumetitle{\volumenumber}
+    }
 
-\vspace{3cm}
-Find the book online, with author’s notes, fan art and other info at:\\
-\url{http://hpmor.com} \\
+    \vspace{0.7cm}
+
+    Find the book online, with author’s notes, fan art and other info at: \url{http://hpmor.com} \\
+    ~\\
+    Based on the characters of the Harry Potter series by J. K. Rowling
+
+    \vspace{0.7cm}
+
+    %    Übersetzung~: Schneefl0cke\\
+    Maintainer~: Reuben Thomas\\
+    \url{https://github.com/rjl20/hpmor}
 
 \end{center}
 
-\cleartoverso
-
-\begin{center}
-\vspace*{2cm}
-
-\thispagestyle{empty}
-Based on the characters of
-
-\vspace*{.5cm}
-
-\Large \MakeUppercase{J. K. Rowling} \normalsize
-
-\vspace*{.5cm}
-
-and her books:
-
-\vspace*{.5cm}
-
-{
-        \newcounter{books_list_counter}
-        \def \hpBook #1{
-                \addtocounter{books_list_counter}{1}
-                \textit{Harry Potter and the #1} \par
-                Year \numtoName{\value{books_list_counter}} at Hogwarts
-                \smallskip\par
-        }
-        \hpBook{Philosopher’s Stone}
-        \hpBook{Chamber of Secrets}
-        \hpBook{Prisoner of Azkaban}
-        \hpBook{Goblet of Fire}
-        \hpBook{Order of the Phoenix}
-        \hpBook{Half-Blood Prince}
-        \hpBook{Deathly Hallows}
-}
-\end{center}
-\cleartorecto% FIXME: For some reason, without this the contents ends up on a verso page (an extra blank page is added)

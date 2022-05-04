@@ -17,7 +17,12 @@
 \makeatother
 % flapwidth: 60mm+3mm each side
 \documentclass[12pt,coverwidth=\the\hpcoverwidth,coverheight=\the\hpcoverheight,spinewidth=\the\hpspinewidth,marklength=0mm,bleedwidth=5mm,flapwidth=63mm]{bookcover}
+% ,french
 
+% translation
+% \usepackage{polyglossia}
+% \setmainlanguage{french}
+ 
 \input{hp-header}
 
 \usepackage{contour}
@@ -26,45 +31,46 @@
 
 \begin{document}
 {
-\setbookcover{bgcolor}{whole}{color=black}
+\definecolor{backgroundcover}{HTML}{272c36}
+\setbookcover{bgcolor}{whole}{color=backgroundcover}
 \setbookcover{fgfirst}{remark}{
-\bfseries\color{blue}DUST JACKET}
-\setbookcover{bgpic}{front}{cover0.jpg}
+  \bfseries\color{blue}DUST JACKET}
+\setbookcover{bgpic}{front}{cover1.pdf}
 \setbookcover{fgfirst}{front}{\hptitle[\coverwidth]{\fullvolumetitle{\volumenumber}}}
 
 % Spine
 \setbookcover{fgfirst}{spine}{
-\centering
-\color{white}\scshape
-\vspace{0.5cm}\huge \volumenumber\\[2ex]\Large
-\vfill
-\rotatebox[origin=c]{90}{\contour[120]{black}{\volumetitle}}
-\vfill}
+  \centering
+  \color{white}\scshape
+  \vspace{0.5cm}\huge \volumenumber\\[2ex]\Large
+  \vfill
+  \rotatebox[origin=c]{90}{\contour[120]{black}{\volumetitle}}
+  \vfill}
 
 % Back cover
 \setbookcover{fgfirst}{back}{
   \centering
   \vspace{20mm}
   \parbox{110mm}{\color{white}\Large\raggedright
-Petunia married a biochemist, and Harry grew up reading science and science fiction. Then came the Hogwarts letter, and a world of intriguing new possibilities to exploit. And new friends, like Hermione Granger, and Professor McGonagall, and Professor Quirrell…
-}}
+    Petunia married a biochemist, and Harry grew up reading science and science fiction. Then came the Hogwarts letter, and a world of intriguing new possibilities to exploit. And new friends, like Hermione Granger, and Professor McGonagall, and Professor Quirrell…
+  }}
 
 % Text on the front flap
 \setbookcover{fgfirst}{front flap}{
-\centering
-\vspace{20mm}
-\parbox{40mm}{\color{white}\raggedright\small
-  HPMOR comes from the world of fan-fiction. With J.~K.~Rowling’s approval, it tells the story of an alternate Harry, an auto-didact rationalist who brings all his powers to bear on the strange new vistas of the world of magic.
+  \centering
+  \vspace{20mm}
+  \parbox{40mm}{\color{white}\raggedright\small
+    HPMOR comes from the world of fan-fiction. With J.~K.~Rowling’s approval, it tells the story of an alternate Harry, an auto-didact rationalist who brings all his powers to bear on the strange new vistas of the world of magic.
 
-  \bigskip The books introduce the reader to the ways of thinking Yudkowsky lays out in his blog, \url{lesswrong.com}.}}
+    \bigskip The books introduce the reader to the ways of thinking Yudkowsky lays out in his blog, \url{lesswrong.com}.}}
 
 % Text on the back flap
 \setbookcover{fgfirst}{back flap}{
-\centering
-\vspace{20mm}
-\parbox{40mm}{\color{white}\small\raggedright
-  % PUT YOUR BACK DUST-FLAP TEXT HERE!
-}}
+  \centering
+  \vspace{20mm}
+  \parbox{40mm}{\color{white}\small\raggedright
+    % PUT YOUR BACK DUST-FLAP TEXT HERE!
+  }}
 
 \makebookcover
 }
