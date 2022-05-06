@@ -42,8 +42,9 @@
 }
 
 % Author’s notes
-% Use with \footnotemark
+\newcommand{\authorsnotefootnotemark}{\footnotemark}
 % \newcommand{\authorsnotetext}[1]{\footnotetext{Author’s note: #1}}
+\newcommand{\authorsnotetext}[1]{}
 
 % Letters
 \newcommand{\letterAddress}[1]{\pagebreak[1]\noindent{}\fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}\scriptsize#1\nopagebreak[4]\par}
@@ -63,13 +64,16 @@
 \newline\rule[1ex]{\textwidth}{.1pt}\newline%
 }
 
-\newenvironment{chapterOpeningAuthorNote}{%
-\parindent=0pt%
-E.~Y.:~
-}
-{%
-\newline\rule[1ex]{\textwidth}{.1pt}\newline%
-}
+% Definition of chapterOpeningAuthorNote when they are desired to be printed
+% FIXME: Make the environment definition switchable with a flag
+% \newenvironment{chapterOpeningAuthorNote}{%
+% \parindent=0pt%
+% E.~Y.:~
+% }
+% {%
+% \newline\rule[1ex]{\textwidth}{.1pt}\newline%
+% }
+\excludecomment{chapterOpeningAuthorNote}
 
 
 % Chapter parts
