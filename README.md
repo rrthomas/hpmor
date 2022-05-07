@@ -13,11 +13,10 @@ book must be built from a git checkout.)
 
 Note: the Omake Files chapters (11 and 64) have been moved to the end of the
 single-file PDF. Those chapter numbers are omitted in the text, so chapter
-10 is followed by chapter 12, for example. Similarly, the chapter
-disclaimers and epigraphs are removed to an appendix. In the six-volume
-PDFs, all chapters are renumbered to start from 1 at the start of a book,
-and there are no appendices.
-
+10 is followed by chapter 12, for example. In the six-volume PDFs, all
+chapters are renumbered to start from 1 at the start of a book, and there are
+no appendices. Some epigraphs have been omitted but are in the source files
+of the chapters.
 
 ## Files
 
@@ -163,11 +162,6 @@ this:
 ### Sections
 
 `\section{Final Aftermath:}`
-
-
-### Disclaimers and Epigraphs
-
-These have been removed to an appendix, `hp-epigraphs.tex`.
 
 
 ### Miscellaneous
