@@ -36,3 +36,6 @@ hp-*.pdf
 hpmor-*.pdf
 hpmor.pdf
 hpmor*.zip
+.vscode/*
+chapters/*-autofix.tex
+

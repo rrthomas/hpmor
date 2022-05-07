@@ -36,8 +36,8 @@ jobs:
         pwd
         ls -al
 
-#    - name: quality check of chapters for known issues
-#      run: python3 check-chapters.py
+    - name: quality check of chapters for known issues
+      run: python3 check-chapters.py
 
     - name: install requirements
       run: sh scripts/install_requirements.sh > /dev/null
