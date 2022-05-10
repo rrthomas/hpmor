@@ -198,9 +198,8 @@ It is recommended to use `polyglossia` (not `babel`).
 Note: there are other translations of HPMOR; here are listed only
 translations of this edition.
 
-* [French](https://github.com/yeKcim/hpmor) (in progress)
-
-* [German](https://github.com/entorb/hpmor-de) (just started)
+* [French](https://github.com/yeKcim/hpmor) (complete)
+* [German](https://github.com/entorb/hpmor-de) (volume 1 (ch1-21) finished)
 
 
 <!--  LocalWords:  hpmor tex hp txt latexmkrc latexmk GNUMakefile 80gsm '
