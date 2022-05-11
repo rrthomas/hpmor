@@ -5,7 +5,8 @@ Maintainer: Reuben Thomas <rrt@sc3d.org>
 
 A LaTeX version of [the popular didactic fan-fiction](http://www.hpmor.com)
 by Eliezer Yudkowsky, which can make e-books in PDF, ePub and Mobi formats,
-and six PDF volumes that can be printed and bound. There are also dust jackets for the printable volumes.
+and six PDF volumes that can be printed and bound. There are also dust
+jackets for the printable volumes.
 
 TeXLive 2015 or later and git are required to build the book. (Note: the
 book must be built from a git checkout.)
@@ -199,7 +200,8 @@ Note: there are other translations of HPMOR; here are listed only
 translations of this edition.
 
 * [French](https://github.com/yeKcim/hpmor) (complete)
-* [German](https://github.com/entorb/hpmor-de) (volume 1 (ch1-21) finished)
+* [German](https://github.com/entorb/hpmor-de) (in progress, volume 1
+(chapters 1–21) finished)
 
 
 <!--  LocalWords:  hpmor tex hp txt latexmkrc latexmk GNUMakefile 80gsm '
