@@ -8,6 +8,8 @@
 \newcommand{\shout}[1]{\textsc{#1}}
 \newcommand{\scream}[1]{\MakeUppercase{#1}}
 \newcommand{\prophesy}[1]{\shout{#1}}
+
+% parsel
 \newcommand{\parselify}[1]{%
   \StrSubstitute{#1}{ss}{ß}[\parselstring]%
   \StrSubstitute{\parselstring}{s}{ss}[\parsselstring]%
@@ -18,7 +20,6 @@
 
 % Special types of text
 \newcommand{\abbrev}[1]{\textsc{\MakeLowercase{#1}}\xspace}
-\newcommand{\headline}[1]{\begin{center}\textsc{#1}\end{center}}
 
 % Common abbreviations
 \newcommand{\am}{~a.m.\xspace}
@@ -26,6 +27,7 @@
 \newcommand{\SPHEW}{{\abbrev{SPHEW}}}
 
 % Newspaper headlines
+\newcommand{\headline}[1]{\begin{center}\textsc{#1}\end{center}}
 \newcommand{\inlineheadline}[1]{\textsc{#1}}
 \newenvironment{headlines}{
   \newcommand{\header}[1]{\begin{SingleSpace}\upshape ##1\end{SingleSpace}}
