@@ -1,0 +1,40 @@
+Gabriele Font Series
+====================
+Gabriele was the name of his granddaughter. In 1957 Max Grundig, German industrialist, bought the two companies Triumph and Adler and merged them into his office machine label 'Triumph Adler'. Thus, 'Gabriele' became the name of a popular series of typewriters in postwar Germany. 
+
+We have chosen this name for our series of typewriter fonts in reminiscence of those machines and all the ladies (called Gabriele or not) that used to type on them from the 1950s to the '80s.
+
+Ah, yes, another typewriter font.
+
+Well sort of. We are aware that there are quite a few of them around. But unlike Gabriele, most are not free for commercial use and/or have problems with umlauts and other extended characters. Gabriele has a complete West European charset, the ribbon members even many East European characters. These are monospaced fonts. The characters have all the same width - with the exception of the "ellipsis" character ("...") which is of course three spaces wide. Naturally, these fonts have and need no kerning.
+
+The Ribbon members of the Gabriele are based on the Dave-Rakowski font "Harting". On his former font activity Dave says on his web site http://home.earthlink.net/~ziodavino/album1_009.htm:
+"At this point, I'm no longer interested in the care and feeding of typefaces, and am ignoring any e-mails about fonts that come my way. Y'all may continue to do what you wish with the shareware fonts". 
+On this basis I have refrained from bothering Dave and have done as I wished.
+
+Gabriele Bad is named after the somewhat darker and grungy look. Inside, she's really nice. Looking similar to the other two but not based on Rakowski's work. This is the darkest one of the three. She's not so good at Eastern European languages, but she can type Turkish fluently.
+
+All three fonts are free to use personally, publicly and commercially. Please respect the following license for redistribution.
+
+
+LICENSE
+=======
+Use
+---
+You may use this font software free of charge and at your own risk for both personal and commercial use. 
+
+Conversion and modification
+---------------------------
+You may convert this font to other formats including web font formats or modify it for your own purposes. You may use web font formats of this font to display text on your web pages, but you may not explicitly offer converted or modified versions of this font software for download or re-use by others, unless you have received permission in writing to do so.
+
+Distribution
+------------
+You may distribute this font on digital media or as a download on your website as long as you comply with the following rules. Violation of one or more of these rules terminates your distribution license and you have to stop distribution immediately:
+
+1. You may offer the font only in form of a ZIP file containing only the font software and this readme file. 
+2. You are not allowed to distribute the font software without this text file.
+3. You may not redistribute modified or converted copies of the font software (see above).
+4. You may not add advertising messages in text or graphics form to the zip file.
+5. You are not allowed to create a self-extracting executable file containing the font software or require the user to run or install a download manager or other software to get the download.
+6. You may not charge money for the download. 
+7. If you want to distribute this font on storage media (CD DVD) produced in numbers of more than 50 identical copies, you must send Fontgrube a specimen copy.
