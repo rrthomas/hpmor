@@ -1,3 +1,5 @@
+2022, yeKcim note: éêèàœ… added
+
 N.B. This version of Lumos has had some glyphs added for HPMOR
 
 
