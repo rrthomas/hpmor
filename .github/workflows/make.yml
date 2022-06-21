@@ -41,7 +41,7 @@ jobs:
 #      run: python3 check-chapters.py
 
     - name: install requirements
-      run: sh install_requirements.sh
+      run: sh scripts/install_requirements.sh
 
     - name: print versions
       run: |
@@ -52,10 +52,10 @@ jobs:
         python3 --version  
 
     - name: make PDFs
-      run: sh make_pdfs.sh > /dev/null
+      run: sh scripts/make_pdfs.sh > /dev/null
 
     - name: make eBooks
-      run: sh make_ebooks.sh
+      run: sh scripts/make_ebooks.sh
 
     - name: test ls after
       run: |
