@@ -4,6 +4,13 @@
 % and consistently typeset.
 % Search for them in the source files to see how to use them.
 
+% Special types of text
+\newcommand{\abbrev}[1]{\textsc{\MakeLowercase{#1}}\xspace}
+
+% Common abbreviations
+\newcommand{\am}{~a.m.\xspace}
+\renewcommand{\pm}{~p.m.\xspace}
+\newcommand{\SPHEW}{\abbrev{SPHEW}}
 % Tone of voice
 \newcommand{\shout}[1]{\textsc{#1}}
 \newcommand{\scream}[1]{\MakeUppercase{#1}}
@@ -18,18 +25,27 @@
 % N.B. Other commands, such as \emph, cannot be used inside \parsel
 \newcommand{\parsel}[1]{\parselify{\fontspec[ExternalLocation]{Parseltongue.ttf}#1}{\ptsansi\parssselstring}}
 
-% Special types of text
-\newcommand{\abbrev}[1]{\textsc{\MakeLowercase{#1}}\xspace}
+% \spell macro
+\newcommand{\spell}[1]{{\Star}\emph{#1}{\Star}}
 
-% Common abbreviations
-\newcommand{\am}{~a.m.\xspace}
-\renewcommand{\pm}{~p.m.\xspace}
-\newcommand{\SPHEW}{\abbrev{SPHEW}}
+% Author’s notes
+\newcommand{\authorsnotefootnotemark}{\footnotemark}
+% \newcommand{\authorsnotetext}[1]{\footnotetext{Author’s note: #1}}
+\newcommand{\authorsnotetext}[1]{}
+
 
 % Newspaper headlines
-\newcommand{\headline}[1]{\begin{center}\textsc{#1}\end{center}}
-\newcommand{\inlineheadline}[1]{\textsc{#1}}
-\newenvironment{headlines}{
+
+\newcommand{\headline}[1]{%
+\begin{center}%
+\textsc{#1}%
+\end{center}}
+
+\newcommand{\inlineheadline}[1]{%
+\textsc{#1}%
+}
+
+\newenvironment{headlines}{%
   \newcommand{\header}[1]{\begin{SingleSpace}\upshape ##1\end{SingleSpace}}
   \let\hmorSavedLabel\label
   \renewcommand{\label}[1]{{\upshape\itshape ##1}}%
@@ -43,47 +59,48 @@
   \let\label\hmorSavedLabel
 }
 
-% Author’s notes
-\newcommand{\authorsnotefootnotemark}{\footnotemark}
-% \newcommand{\authorsnotetext}[1]{\footnotetext{Author’s note: #1}}
-\newcommand{\authorsnotetext}[1]{}
 
-% Letters
-\newcommand{\letterAddress}[1]{\pagebreak[1]\noindent{}\fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}\scriptsize#1\nopagebreak[4]\par}
-\newcommand{\letterClosing}[2][\vskip 1\baselineskip]{\nopagebreak[4]\fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}\scriptsize#1\par\nopagebreak[5]\noindent#2}
+% Letters / writtenNote
 
-\newenvironment{writtenNote}{\fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}\scriptsize%
+\newenvironment{writtenNote}{%
+\fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}\scriptsize%
   \renewcommand{\emph}{\uline}
   \vskip 1\baselineskip plus 1\baselineskip minus 1\baselineskip%
   \begin{adjustwidth}{\parindent}{\parindent}%
-    \par\noindent\itshape}
-  {\end{adjustwidth}\vskip 1\baselineskip plus 1\baselineskip minus 1\baselineskip}
-
-\newenvironment{chapterOpeningQuote}{%
-  \parindent=0pt%
-  \itshape}
+    \par\noindent%
+    \itshape%
+    }
   {%
-  \newline\rule[1ex]{\textwidth}{.1pt}\newline%
-  }
+  \end{adjustwidth}%
+  \vskip 1\baselineskip plus 1\baselineskip minus 1\baselineskip%
+}
 
-% Definition of chapterOpeningAuthorNote when they are desired to be printed
-% FIXME: Make the environment definition switchable with a flag
-% \newenvironment{chapterOpeningAuthorNote}{%
-% \parindent=0pt%
-% \itshape
-% E.~Y.:~
-% }
-% {%
-% \newline\rule[1ex]{\textwidth}{.1pt}\newline%
-% }
-\excludecomment{chapterOpeningAuthorNote}
+% \letterAddress
+\newcommand{\letterAddress}[1]{%
+\pagebreak[1]\noindent{}\fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}%
+\scriptsize#1\nopagebreak[4]\par%
+}
+
+% \letterClosing
+\newcommand{\letterClosing}[2][\vskip 1\baselineskip]{%
+\nopagebreak[4]\fontspec[ExternalLocation]{Graphe_Alpha_alt.ttf}%
+\scriptsize#1%
+\par\nopagebreak[5]\noindent#2%
+}
 
 
-% Chapter parts
+
+
+
+
+% PartChapters
 % \partchapter{The Stanford Prison Experiment}{TSPE}{XIII}{Aftermaths}
 % TOC: TSPE part XIII: Aftermaths
 % Page header: The Stanford Prison Experiment XIII: \\? Aftermaths
 % Title: The Stanford Prison Experiment, Part XIII: \\? Aftermaths
+\newcommand{\partchapter}[3][\relax]{%
+	\chapter[\texorpdfstring{#2, \abbrev{part #3}}{#2, part #3}]%
+		[#2 #3]{#2, Part~#3#1}}
 \newcommand{\namedpartchapter}[5][\relax]{%
 	\chapter[%
 			\texorpdfstring{%
@@ -92,16 +109,33 @@
 			\mbox{#2 #4:} \mbox{#5}]{%
 			#2, Part~#4:\protect\linebreak[1] #5#1}%
 }
-
-\newcommand{\partchapter}[3][\relax]{%
-	\chapter[\texorpdfstring{#2, \abbrev{part #3}}{#2, part #3}]%
-		[#2 #3]{#2, Part~#3#1}}
-
+      
 % Hanging paras for play scripts (used in Omake IV)
 \newenvironment{playdialog}{\begin{hangparas}{2em}{1}}{\end{hangparas}}
 
+% Chapter openings
+% Definition of chapterOpeningAuthorNote when they are desired to be printed
+% FIXME: Make the environment definition switchable with a flag
+% \newenvironment{chapterOpeningAuthorNote}{%
+% \par\noindent%
+% E.~Y.:~
+% }
+% {%
+% \newline\rule[1ex]{\textwidth}{.1pt}\newline%
+% }
+\excludecomment{chapterOpeningAuthorNote}
 
-% Stars
+\newenvironment{chapterOpeningQuote}{%
+\parindent=0pt%
+\itshape}
+{\newline\rule[1ex]{\textwidth}{.1pt}\newline}
+
+
+
+
+
+
+% Stars and breaks
 
 % Single “magic star” decoration
 \newcommand{\Star}{{\fontspec[ExternalLocation]{Miscelanea.ttf}*}}
