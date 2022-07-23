@@ -23,7 +23,19 @@
   \StrSubstitute{\parsselstring}{ß}{sss}[\parssselstring]%
 }
 % N.B. Other commands, such as \emph, cannot be used inside \parsel
-\newcommand{\parsel}[1]{\parselify{\fontspec[ExternalLocation]{Parseltongue.ttf}#1}{\ptsansi\parssselstring}}
+%
+% parsel
+% old version of parsel
+\newcommand{\parsela}[1]{\parselify{#1}%
+{\ptsansi\parssselstring}}
+%
+% new FR version of parsel by yeKcim
+% note: Other commands, such as \emph, cannot be used inside \parsel
+\newcommand{\parselb}[1]{\parselify{\fontspec[ExternalLocation]{Parseltongue.ttf}#1}%
+{\ptsansi\parssselstring}}
+%
+% select one of above
+\newcommand{\parsel}[1]{\parsela{#1}}
 
 % \spell macro
 \newcommand{\spell}[1]{{\Star}\emph{#1}{\Star}}
