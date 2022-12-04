@@ -6,4 +6,4 @@ sudo apt update
 sudo apt install texlive-xetex latexmk
 
 # ebook
-sudo apt install pandoc calibre 
+sudo apt install pandoc calibre

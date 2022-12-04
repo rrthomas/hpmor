@@ -7,7 +7,7 @@ use File::Spec::Functions;
   'hpmor',
   'hpmor-1', 'hpmor-2', 'hpmor-3', 'hpmor-4', 'hpmor-5', 'hpmor-6',
   'layout/hpmor-dust-jacket-1', 'layout/hpmor-dust-jacket-2',
-  'layout/hpmor-dust-jacket-3', 'layout/hpmor-dust-jacket-4', 
+  'layout/hpmor-dust-jacket-3', 'layout/hpmor-dust-jacket-4',
   'layout/hpmor-dust-jacket-5', 'layout/hpmor-dust-jacket-6',
  );
 

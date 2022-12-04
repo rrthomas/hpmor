@@ -50,7 +50,7 @@
 %
 % Custom chapter style
 %
-\makeatletter 
+\makeatletter
 \makechapterstyle{evans}{%
 	\renewcommand*{\partnamefont}{\hpfont\huge}
 	\renewcommand*{\partnumfont}{\partnamefont}
@@ -58,24 +58,24 @@
 	\renewcommand*{\chapnamefont}{\hpfont\large}
 	\renewcommand*{\chapnumfont}{\chapnamefont}
 	\renewcommand*{\chaptitlefont}{\hpfont\huge}
-	
+
 	\setlength{\beforechapskip}{4\baselineskip plus 2\baselineskip minus 2\baselineskip }
 	\setlength{\midchapskip}{0pt}
 	\setlength{\afterchapskip}{1\baselineskip}
-	
+
 	\renewcommand*{\printchapternum}{%
 		\chapnumfont \hyperref[contents]{\textls[30]{
 \IfInteger{\thechapter}{\NUMBERstring{chapter}}{\thechapter}
 }}}
-	
+
 	\renewcommand*{\printchaptername}{%
 		\centering \chapnamefont \hyperref[contents]{\MakeUppercase{\textls[30]{\@chapapp}}}
 	}
-	
+
 	\renewcommand*{\printchaptertitle}[1]{%
 		\vskip 0pt\begin{center}\chaptitlefont \textls[50]{\MakeUppercase{##1}}\end{center}\par
 	}
-	
+
 	\renewcommand*{\chaptermark}[1]{
 		\markboth{
                   \MakeUppercase{##1}

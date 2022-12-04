@@ -57,7 +57,7 @@ A. Private Distribution
 You may give away single copies of the software as long as you don't modify this license or other files of the archive.
 
 B. Mirroring
-If you want to mirror this font, feel free to do so as long as you don't modify the original archive. If you want to be kept up to date about major updates, check out my website. 
+If you want to mirror this font, feel free to do so as long as you don't modify the original archive. If you want to be kept up to date about major updates, check out my website.
 
 C. Publishing
 You may publish this font in a book or magazine (or other media) by simply sending a written request for permission, including a description of your specific needs. I request only to be proper credited as the author.
@@ -141,7 +141,7 @@ A. Distribución Privada
 Puedes distribuir copias del software siempre que no modifiques esta licencia u otros archivos en el paquete.
 
 B. Servidores Espejo (Mirroring)
-Si quieres poner en un servidor espejo (mirroring) esta fuente, puedes hacerlo mientras no modifiques el archivo original. Si quieres información sobre actualizaciones, visita el sitio de Bajo La Luna Producciones. 
+Si quieres poner en un servidor espejo (mirroring) esta fuente, puedes hacerlo mientras no modifiques el archivo original. Si quieres información sobre actualizaciones, visita el sitio de Bajo La Luna Producciones.
 
 C. Publicación
 Puedes publicar esta fuente en un libro, revista u otro medio enviando una solicitud de permiso por escrito, incluyendo una descripción de tus necesidades específicas. Sólo pido que me des el crédito como autor.

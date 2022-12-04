@@ -1,6 +1,6 @@
 # Harry Potter and the Methods Of Rationality
 
-https://github.com/rrthomas/hpmor  
+https://github.com/rrthomas/hpmor
 Maintainer: Reuben Thomas <rrt@sc3d.org>
 
 A LaTeX version of [the popular didactic fan-fiction](http://www.hpmor.com)
@@ -176,7 +176,7 @@ the chapters they appear in for the appropriate markup.
 ### Markup
 
 These are macros defined in `layout/hp-markup.tex`. You should glance
-through that file to see what commands are available, and use them instead 
+through that file to see what commands are available, and use them instead
 of direct markup; for example `\shout` rather than `\textsc`.
 
 

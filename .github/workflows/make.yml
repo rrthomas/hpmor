@@ -3,9 +3,9 @@ name: Build HPMOR PDFs and eBooks
 # controls when the action will run.
 # workflow_dispatch: manual triggering
 # push: triggers the workflow on push request events but only for the master branch
-on:  
-  workflow_dispatch:    
-  push: 
+on:
+  workflow_dispatch:
+  push:
     branches: [ master ]
 
 # a workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -48,7 +48,7 @@ jobs:
         xelatex -v
         latexmk -v
         pandoc -v
-        python3 --version  
+        python3 --version
 
     - name: make PDFs
       run: sh scripts/make_pdfs.sh > /dev/null
@@ -61,7 +61,7 @@ jobs:
         pwd
         ls -al
 
-# publish to release       
+# publish to release
     - name: upload to release
       uses: softprops/action-gh-release@v1
       with:

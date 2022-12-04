@@ -32,7 +32,7 @@ Freeware for personal use only by Luis Huacuja García; see `narnia_bll/SpecialR
 
 ## Ringbearer
 
-Freeware for non-commercial use only by Pete Klassen; see `ringbearer/readme.html`. 
+Freeware for non-commercial use only by Pete Klassen; see `ringbearer/readme.html`.
 
 ## Thundercats
 

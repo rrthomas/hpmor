@@ -1,5 +1,5 @@
 {
-    "lang": "EN",
-    "raise_error": true,
-    "print_diff": true
+  "lang": "EN",
+  "print_diff": true,
+  "raise_error": true
 }
