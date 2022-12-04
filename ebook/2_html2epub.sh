@@ -1,13 +1,13 @@
-#!/bin/sh 
+#!/bin/sh
 
 # by Torben Menke https://entorb.net
 
-# run from within ebook dir via 
+# run from within ebook dir via
 # ./2_html2epub.sh
 
 mkdir -p tmp
 
-echo 1. extract titlepage from PDF 
+echo 1. extract titlepage from PDF
 cp ../hpmor.pdf tmp/
 
 # 1.2 extract title page from PDF and convert to jpeg

@@ -39,6 +39,9 @@ jobs:
     - name: quality check of chapters for known issues
       run: python3 check-chapters.py
 
+    - name: run pre-commit tests
+      uses: pre-commit/action@v3.0.0
+
     - name: install requirements
       run: sh scripts/install_requirements.sh > /dev/null
 

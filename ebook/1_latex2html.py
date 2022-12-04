@@ -1,23 +1,21 @@
 #!/usr/bin/env python3
-
 # by Torben Menke https://entorb.net
-
 """
-converter script:
+Converter script.
+
 reads latex code in ../chapters
 converts to html
 as preparation for conversion into epub format
 output dir: output/
 
-run from within ebook dir via 
+run from within ebook dir via
 python3 1_latex2html.py
 """
-
+import glob
 import os
 import re
-import glob
-from datetime import date
 import sys
+from datetime import date
 
 # Notes
 # footnotes are converted to inline text
@@ -34,8 +32,8 @@ os.chdir(os.path.dirname(sys.argv[0]))
 dir_tex_source = "../chapters/"
 dir_tmp = "tmp"
 dir_out = "output"
-for dir in (dir_tmp, dir_out):
-    os.makedirs(dir, exist_ok=True)
+for my_dir in (dir_tmp, dir_out):
+    os.makedirs(my_dir, exist_ok=True)
 
 
 html_preamble = f"""
@@ -57,8 +55,8 @@ html_preamble = f"""
 
 css = """
 div.letter {
-	font-style: italic;
-	margin-left: 1em;
+    font-style: italic;
+    margin-left: 1em;
 }
 div.verse {
     margin-left: 1em;
@@ -89,34 +87,34 @@ div.chapterOpeningQuote {
     font-style: italic;
 }
 span.abbrev{
-	text-transform: lowercase;
-	font-variant: small-caps;
+    text-transform: lowercase;
+    font-variant: small-caps;
 }
 span.prophesy{
-	font-variant: small-caps;
+    font-variant: small-caps;
 }
 span.scream{
-	text-transform: uppercase;
+    text-transform: uppercase;
 }
 span.shout{
-	font-variant: small-caps;
+    font-variant: small-caps;
 }
 span.parsel{
-	font-style: italic;
+    font-style: italic;
 }
 span.headline_header{
 }
 span.headline{
-	font-style: italic;
+    font-style: italic;
 }
 span.headline_label{
-	font-variant: small-caps;
+    font-variant: small-caps;
 }
 span.smallcaps{
-	font-variant: small-caps;
+    font-variant: small-caps;
 }
 span.uppercase{
-	text-transform: uppercase;
+    text-transform: uppercase;
 }
 """
 
@@ -155,7 +153,10 @@ def simplify_tex(s: str) -> str:
 
     # commands to remove
     s = re.sub(
-        r"\\lettrine\{(.)\}\{(.*?)\}", r"\1\2", s, flags=re.DOTALL | re.IGNORECASE
+        r"\\lettrine\{(.)\}\{(.*?)\}",
+        r"\1\2",
+        s,
+        flags=re.DOTALL | re.IGNORECASE,
     )
     s = re.sub(
         r"\\lettrine\[ante=(.+?)\]\{(.)\}\{(.*?)\}",
@@ -164,7 +165,10 @@ def simplify_tex(s: str) -> str:
         flags=re.DOTALL | re.IGNORECASE,
     )
     s = re.sub(
-        r"\\lettrinepara\{(.)\}\{(.*?)\}", r"\1\2", s, flags=re.DOTALL | re.IGNORECASE
+        r"\\lettrinepara\{(.)\}\{(.*?)\}",
+        r"\1\2",
+        s,
+        flags=re.DOTALL | re.IGNORECASE,
     )
     s = re.sub(
         r"\\lettrinepara\[ante=(.+?)\]\{(.)\}\{(.*?)\}",
@@ -207,7 +211,7 @@ def simplify_tex(s: str) -> str:
     )
     # Utilitarian Twilight
     s = s.replace(
-        "\\OmakeIVspecialsection{\\fontspec[ExternalLocation]{Twilight}Utilitarian Twilight\protect\\footnotemark}",
+        "\\OmakeIVspecialsection{\\fontspec[ExternalLocation]{Twilight}Utilitarian Twilight\\protect\\footnotemark}",
         "\\section{Utilitarian Twilight}",
     )
 
@@ -250,7 +254,9 @@ def tex2html(s: str) -> str:
     if "Asking the Wrong Questions" in s:
         # \begin{align*} -> writtenNote
         myMatches = re.finditer(
-            r"\\begin\{align\*\}.+?\\end\{align\*\}", s, flags=re.DOTALL | re.IGNORECASE
+            r"\\begin\{align\*\}.+?\\end\{align\*\}",
+            s,
+            flags=re.DOTALL | re.IGNORECASE,
         )
         for myMatch in myMatches:
             was = myMatch.group(0)
@@ -303,8 +309,8 @@ def tex2html(s: str) -> str:
         )
         s = s.replace("\\scshape Hypotheses:\n\n", "\\textsc{Hypotheses:}")
         s = s.replace("\\scshape Tests:", "\\textsc{Tests:}")
-        s = s.replace("\itshape\n", "")
-        s = s.replace("{\scshape Result:}", "<br/>Result:")
+        s = s.replace("\\itshape\n", "")
+        s = s.replace(r"{\scshape Result:}", "<br/>Result:")
 
     #
     # cleanup
@@ -345,7 +351,8 @@ def tex2html(s: str) -> str:
     s = s.replace("\\vspace*{\\fill}\n", "")
     s = s.replace("\\vskip 0pt plus 4\\baselineskip", "")
     s = s.replace(
-        "\\vskip 1\\baselineskip plus .5\\textheight minus 1\\baselineskip", ""
+        "\\vskip 1\\baselineskip plus .5\\textheight minus 1\\baselineskip",
+        "",
     )
 
     # some simple replacings
@@ -362,9 +369,9 @@ def tex2html(s: str) -> str:
     s = s.replace("\\censor{Hermione}", "xxx")
     s = s.replace("$\\times$", "&times;")
     # s = s.replace("\\times", "&times;")
-    s = s.replace("\@.", ".")
-    s = s.replace("$\mbox{P}=\mbox{NP}$", "<i>P</i>=<i>NP</i>")
-    s = s.replace("\mbox{“Salazar’s—”}", "“Salazar’s—”")
+    s = s.replace(r"\@.", ".")
+    s = s.replace(r"$\mbox{P}=\mbox{NP}$", "<i>P</i>=<i>NP</i>")
+    s = s.replace(r"\mbox{“Salazar’s—”}", "“Salazar’s—”")
     s = s.replace("170–{140}", "170–140")
 
     # env to delete the optional parameters from
@@ -384,7 +391,7 @@ def tex2html(s: str) -> str:
     # s = s.replace("\chapter*", "\chapter")
     s = re.sub(r"\\chapter\*\{(.*?)\}", r"<h2>\1</h2>", s)
 
-    s = s.replace("\section*", "\section")
+    s = s.replace(r"\section*", r"\section")
     myMatches = re.finditer(r"(\\chapter\{([^\}]+)\})", s)
     for myMatch in myMatches:
         was = myMatch.group(1)
@@ -397,12 +404,13 @@ def tex2html(s: str) -> str:
         s = s.replace(was, womit)
     # \namedpartchapter{The Stanford Prison Experiment}{TSPE}{VI}{Constrained Optimization}
     myMatches = re.finditer(
-        r"(\\namedpartchapter\{([^\}]+)\}\{([^\}]+)\}\{([^\}]+)\}\{([^\}]+)\})", s
+        r"(\\namedpartchapter\{([^\}]+)\}\{([^\}]+)\}\{([^\}]+)\}\{([^\}]+)\})",
+        s,
     )
     for myMatch in myMatches:
         was = myMatch.group(1)
         womit = convert_chapter(
-            myMatch.group(2) + ", Part " + myMatch.group(4) + ": " + myMatch.group(5)
+            myMatch.group(2) + ", Part " + myMatch.group(4) + ": " + myMatch.group(5),
         )
         s = s.replace(was, womit)
 
@@ -422,11 +430,17 @@ def tex2html(s: str) -> str:
     )
     # emph
     s = re.sub(
-        r"\\emph\{([^\}\\]+)\}", r"<i>\1</i>", s, flags=re.DOTALL | re.IGNORECASE
+        r"\\emph\{([^\}\\]+)\}",
+        r"<i>\1</i>",
+        s,
+        flags=re.DOTALL | re.IGNORECASE,
     )
     # \sout = strike through
     s = re.sub(
-        r"\\(sout)\{([^\}\\]+?)\}", r"<s>\2</s>", s, flags=re.DOTALL | re.IGNORECASE
+        r"\\(sout)\{([^\}\\]+?)\}",
+        r"<s>\2</s>",
+        s,
+        flags=re.DOTALL | re.IGNORECASE,
     )
     # \url
     s = re.sub(
@@ -445,7 +459,10 @@ def tex2html(s: str) -> str:
     )
     # \textbf
     s = re.sub(
-        r"\\(textbf)\{([^\}\\]+)\}", r"<b>\2</b>", s, flags=re.DOTALL | re.IGNORECASE
+        r"\\(textbf)\{([^\}\\]+)\}",
+        r"<b>\2</b>",
+        s,
+        flags=re.DOTALL | re.IGNORECASE,
     )
     # \textsc
     s = re.sub(
@@ -470,11 +487,17 @@ def tex2html(s: str) -> str:
     )
     # emph 2nd run
     s = re.sub(
-        r"\\emph\{([^\}\\]+)\}", r"<i>\1</i>", s, flags=re.DOTALL | re.IGNORECASE
+        r"\\emph\{([^\}\\]+)\}",
+        r"<i>\1</i>",
+        s,
+        flags=re.DOTALL | re.IGNORECASE,
     )
     # \section{...} -> h3
     s = re.sub(
-        r"\\(section)\{([^\}\\]+)\}", r"<h3>\2</h3>", s, flags=re.DOTALL | re.IGNORECASE
+        r"\\(section)\{([^\}\\]+)\}",
+        r"<h3>\2</h3>",
+        s,
+        flags=re.DOTALL | re.IGNORECASE,
     )
 
     # emph
@@ -498,7 +521,10 @@ def tex2html(s: str) -> str:
     )
     # letterAddress
     s = re.sub(
-        r"\\letterAddress\{([^\}\\]+)\}", r"\1", s, flags=re.DOTALL | re.IGNORECASE
+        r"\\letterAddress\{([^\}\\]+)\}",
+        r"\1",
+        s,
+        flags=re.DOTALL | re.IGNORECASE,
     )
     # letterClosing
     s = re.sub(
@@ -508,7 +534,10 @@ def tex2html(s: str) -> str:
         flags=re.DOTALL | re.IGNORECASE,
     )
     s = re.sub(
-        r"\\letterClosing\{([^\}\\]+)\}", r"\1", s, flags=re.DOTALL | re.IGNORECASE
+        r"\\letterClosing\{([^\}\\]+)\}",
+        r"\1",
+        s,
+        flags=re.DOTALL | re.IGNORECASE,
     )
 
     # \begin{em} and emph
@@ -624,12 +653,17 @@ def tex2html(s: str) -> str:
 
     # \later
     s = re.sub(
-        r"\\later\b", r'<div class="later">*</div>', s, flags=re.DOTALL | re.IGNORECASE
+        r"\\later\b",
+        r'<div class="later">*</div>',
+        s,
+        flags=re.DOTALL | re.IGNORECASE,
     )
 
     # footnotes_authorsnotetext
     myMatches = re.finditer(
-        r"(\\authorsnotetext\{([^\}\\]+?)\})", s, flags=re.DOTALL | re.IGNORECASE
+        r"(\\authorsnotetext\{([^\}\\]+?)\})",
+        s,
+        flags=re.DOTALL | re.IGNORECASE,
     )
     for myMatch in myMatches:
         was = myMatch.group(1)
@@ -639,7 +673,9 @@ def tex2html(s: str) -> str:
 
     # footnotetext
     myMatches = re.finditer(
-        r"(\\footnotetext\{([^\}\\]+?)\})", s, flags=re.DOTALL | re.IGNORECASE
+        r"(\\footnotetext\{([^\}\\]+?)\})",
+        s,
+        flags=re.DOTALL | re.IGNORECASE,
     )
     for myMatch in myMatches:
         was = myMatch.group(1)
@@ -725,7 +761,12 @@ def find_tex_commands(s: str) -> list:
     return l
 
 
-fhAll = open(f"{dir_out}/hpmor.html", mode="w", encoding="utf-8", newline="\n")
+fhAll = open(  # noqa: SIM115
+    f"{dir_out}/hpmor.html",
+    mode="w",
+    encoding="utf-8",
+    newline="\n",
+)
 fhAll.write(html_start)
 fhAll.write(html_preamble)
 
@@ -737,7 +778,7 @@ for fileIn in sorted(glob.glob(f"{dir_tex_source}/hpmor-chapter-*.tex")):
     (filePath, fileName) = os.path.split(fileIn)
     (fileBaseName, fileExtension) = os.path.splitext(fileName)
     fileOut = f"{dir_tmp}/{fileBaseName}.html"
-    with open(fileIn, mode="r", encoding="utf-8", newline="\n") as fh:
+    with open(fileIn, encoding="utf-8", newline="\n") as fh:
         cont = fh.read()
     cont = simplify_tex(cont)
     cont = tex2html(cont)
@@ -747,7 +788,7 @@ for fileIn in sorted(glob.glob(f"{dir_tex_source}/hpmor-chapter-*.tex")):
     if len(l) > 0:
         print(
             f"WARN: there are leftover LaTeX commands in file {fileOut}:\n"
-            + ", ".join(l)
+            + ", ".join(l),
         )
 
     with open(fileOut, mode="w", encoding="utf-8", newline="\n") as fh:
@@ -797,7 +838,9 @@ for item in l_tex_commands_unhandled:
         d_tex_commands_unhandled[item] = 1
 # sort values reversed
 for key, value in sorted(
-    d_tex_commands_unhandled.items(), key=lambda item: item[1], reverse=True
+    d_tex_commands_unhandled.items(),
+    key=lambda item: item[1],
+    reverse=True,
 ):
     print(f"{value}\t{key}")
 
