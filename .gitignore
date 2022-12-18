@@ -38,3 +38,11 @@ hpmor.pdf
 hpmor*.zip
 .vscode/*
 chapters/*-autofix.tex
+
+tmp/
+hpmor*.html
+hpmor*.epub
+hpmor*.mobi
+hpmor*.fb2
+hpmor*.docx
+~$hpmor.docx

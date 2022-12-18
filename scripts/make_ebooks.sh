@@ -1,8 +1,16 @@
 #!/bin/sh
 
 # ensure we are in the hpmor root dir
-script_dir=$(cd `dirname $0` && pwd)
+script_dir=$(cd $(dirname $0) && pwd)
 cd $script_dir/..
 
-cd ebook
-python3 ./1_latex2html.py && sh ./2_html2epub.sh
+# TODO:
+# image on last page
+
+sh scripts/ebook/1.sh
+sh scripts/ebook/2.sh
+python3 scripts/ebook/3.py
+python3 scripts/ebook/4.py
+sh scripts/ebook/5.sh
+python3 scripts/ebook/6.py
+sh scripts/ebook/7.sh

@@ -1,0 +1,117 @@
+/* start html.css */
+
+em {
+	font-style: italic;
+}
+
+em em {
+	font-style: normal;
+}
+
+em em em {
+	font-style: italic;
+}
+
+/* V1: using custom fonts */
+
+/* @font-face {
+	font-family: "Automobile Contest";
+	font-weight: normal;
+	font-style: normal;
+	src: url("./fonts/automobile_contest/Automobile Contest.ttf");
+}
+span.McGonagallWhiteBoard {
+	font: 5em "Automobile Contest";
+	color: #cc3333;
+	text-decoration: underline;
+	text-decoration-color: #3333cc;
+	text-decoration-thickness: 1px;
+}
+
+/* @font-face {
+	font-family: "gabriele-bad";
+	font-weight: normal;
+	font-style: normal;
+	src: url("./fonts/gabriele_bad_ah/gabriele-bad.ttf");
+}
+span.headline {
+	font: 1.2em "gabriele-bad";
+	font-variant: small-caps;
+	color: #424242;
+}
+
+@font-face {
+	font-family: "Parseltongue";
+	font-weight: normal;
+	font-style: italic;
+	src: url("./fonts/Parseltongue/Parseltongue.ttf");
+}
+span.parsel {
+	font: 1.0em "Parseltongue";
+	font: "Parseltongue";
+	font-style: italic;
+}
+div.parsel {
+	font: 1.0em "Parseltongue";
+	font: "Parseltongue";
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "Graphe_Alpha_alt";
+	font-weight: normal;
+	font-style: normal;
+	src: url("./fonts/graphe/Graphe_Alpha_alt.ttf");
+}
+div.writtenNote {
+	font: 1em "Graphe_Alpha_alt";
+	font-style: italic;
+	margin-left: 1em;
+}
+span.writtenNote {
+	font: 1em "Graphe_Alpha_alt";
+	font-style: italic;
+	margin-left: 1em;
+}
+*/
+
+
+/* V2: no custom font to increase compatibility (modi seems not to support fonts, and char ß is missing in some of the fonts */
+
+
+
+span.lettrine {
+	font-size: 150%;
+}
+
+span.parsel {
+	font-style: italic;
+}
+
+div.parsel {
+	font-style: italic;
+}
+
+div.writtenNote {
+	font-style: italic;
+	margin-left: 1em;
+}
+
+span.writtenNote {
+	font-style: italic;
+	margin-left: 1em;
+}
+
+span.McGonagallWhiteBoard {
+	color: #cc3333;
+	text-decoration: underline;
+	text-decoration-color: #3333cc;
+	/* text-decoration-thickness: 1px; */
+}
+
+span.headline {
+	font-variant: small-caps;
+}
+
+
+/* end html.css */
