@@ -8,6 +8,9 @@ by Eliezer Yudkowsky, which can make e-books in PDF, ePub and Mobi formats,
 and six PDF volumes that can be printed and bound. There are also dust
 jackets for the printable volumes.
 
+See [latest release](https://github.com/rrthomas/hpmor/releases/latest)
+for PDF and e-book downloads.
+
 TeXLive 2015 or later and git are required to build the book. (Note: the
 book must be built from a git checkout.)
 
@@ -32,7 +35,7 @@ of the chapters.
   them to GitHub. (Mostly of interest to project maintainers.) `make all`
   does the same as `latexmk` (see below), which may be useful for editor
   integration (e.g. Emacs).
-* `ebook/` - e-book generation scripts
+* `scripts/ebook/` - e-book generation scripts
 
 
 ## Building the book(s)
