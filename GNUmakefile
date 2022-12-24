@@ -1,10 +1,10 @@
-# Make a PDF release
+# Make a PDF and e-book release
 
 PROJECT=hpmor
 
 TAG := $(shell git describe --tags)
 VERSION := $(shell echo $(TAG) | sed -e 's/^v//')
-EBOOKS = ebook/output/$(PROJECT).epub ebook/output/$(PROJECT).mobi
+EBOOKS = $(PROJECT).epub $(PROJECT).mobi $(PROJECT).fb2
 ZIPFILE = $(PROJECT)-$(VERSION).zip
 
 all: ebooks pdf
@@ -13,7 +13,7 @@ pdf:
 	latexmk
 
 ebooks: pdf
-	cd ebook && ./1_latex2html.py && ./2_html2epub.sh
+	sh scripts/make_ebooks.sh
 
 zip: pdf ebooks
 	rm -f $(ZIPFILE) && \
