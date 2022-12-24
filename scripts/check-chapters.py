@@ -189,9 +189,16 @@ def fix_dots(s: str) -> str:
     s = s.replace(" …,", "…,")
     if settings["lang"] == "EN":
         s = s.replace(" …”", "…”")
+        # "… " but not before “
+        s = re.sub(r"… (?!“)", r"…", s)
+        # " …" but after punctuation
+        s = re.sub(r"(?<!(%|,|\.|!|\?|:)) …", r"…", s)  # … at start of line
     if settings["lang"] == "DE":
         s = s.replace(" …“", "…“")
-    # … at start of line
+        # "… " but not before „
+        s = re.sub(r"… (?!„)", r"…", s)
+        # " …" but after punctuation
+        s = re.sub(r"(?<!(%|,|\.|!|\?|:)) …", r"…", s)  # … at start of line
     s = re.sub(r"^ *… *", r"…", s)
     # … at end of line
     s = re.sub(r" *… *$", r"…", s)
