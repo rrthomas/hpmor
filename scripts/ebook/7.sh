@@ -5,7 +5,7 @@
 
 echo === 7. HTML -\> epub,mobi, doc ===
 
-script_dir=$(cd $(dirname $0) && pwd)
+script_dir=$(dirname $0)
 cd $script_dir/../..
 
 source_file="hpmor.html"

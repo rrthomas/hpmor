@@ -6,7 +6,7 @@
 echo === 5. LaTeX -\> HTML via pandoc ===
 
 # ensure we are in the hpmor root dir
-script_dir=$(cd $(dirname $0) && pwd)
+script_dir=$(dirname $0)
 cd $script_dir/../..
 
 source_file="tmp/hpmor-epub-4-flatten-parsel.tex"

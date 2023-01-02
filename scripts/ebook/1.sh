@@ -6,7 +6,7 @@
 echo === 1. extract cover from PDF to image===
 
 # ensure we are in the hpmor root dir
-script_dir=$(cd $(dirname $0) && pwd)
+script_dir=$(dirname $0)
 cd $script_dir/../..
 
 mkdir -p tmp/

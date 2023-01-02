@@ -6,7 +6,7 @@
 echo === 2. flatten .tex files ===
 
 # ensure we are in the hpmor root dir
-script_dir=$(cd $(dirname $0) && pwd)
+script_dir=$(dirname $0)
 cd $script_dir/../..
 
 source_file="scripts/ebook/hpmor-ebook.tex"
