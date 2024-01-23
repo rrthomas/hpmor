@@ -46,6 +46,21 @@
 \newcommand{\authorsnotefootnotemark}{}
 \newcommand{\authorsnotetext}[1]{}
 
+% McGonagall's board
+\newcommand{\McGonagallWhiteBoard}[1]{%
+  \begin{center}
+    \newsavebox{\hpbox}%
+    \fontspec[ExternalLocation,Color=AA0000]{Florante}
+    \savebox{\hpbox}{\MakeUppercase{#1}}
+    \vspace{0.5ex}
+    \usebox{\hpbox}
+    \settowidth{\versewidth}{\usebox{\hpbox}}
+    \vskip -1ex
+    \fontspec[ExternalLocation,Color=2020FF]{ArchitectsDaughter}
+    \resizebox{\versewidth}{.6ex}{\rotatebox{90}{I}}
+  \end{center}%
+}
+
 
 % Newspaper headlines
 
