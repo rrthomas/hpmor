@@ -1,5 +1,10 @@
 /* start html.css */
 
+p {
+	text-align: justify;
+	line-height: 1.25;
+}
+
 em {
 	font-style: italic;
 }
@@ -102,7 +107,7 @@ span.writtenNote {
 	margin-left: 1em;
 }
 
-div.McGonagallWhiteBoard {
+div.McGonagallWhiteBoard p {
 	color: #cc3333;
 	text-align: center;
 	text-transform: uppercase;
