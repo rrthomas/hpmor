@@ -35,6 +35,7 @@ CMD latexmk hpmor ; ./scripts/make_ebooks.sh
 
 # run specific command or script
 # docker run -it --mount type=bind,src="$(pwd)",dst=/app hpmor latexmk hpmor-1
+# docker run -it --mount type=bind,src="$(pwd)",dst=/app hpmor ./scripts/make_ebooks.sh
 
 # login via
 # docker run -it --mount type=bind,src="$(pwd)",dst=/app hpmor bash

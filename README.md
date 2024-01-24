@@ -39,6 +39,8 @@ of the chapters.
 
 ## Building the book(s)
 
+If you do not want to install all requirements on your native system, you can run the build in a Docker container instead. See bottom of [Dockerfile](Dockerfile) for further info.
+
 * `latexmk`: Build all PDFs. (If in doubt, just run this command and do
   something else for twenty minutes!)
 * `make all`: Build a Zip of the PDFs.
