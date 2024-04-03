@@ -28,8 +28,7 @@ if (-d $hooks_dir) {
 }
 
 # Use XeLaTeX (equivalent to command-line -xelatex option)
-$pdflatex = 'xelatex %O %S';
-$pdflatex = "xelatex %O \"\\PassOptionsToPackage{$options}{hp-book}\\input{%S}\"" if $options;
+$xelatex = "xelatex %O \"\\PassOptionsToPackage{$options}{hp-book}\\input{%S}\"" if $options;
 my $basedir = curdir();
 if (defined($chapter) || defined($chapterfile)) {
   if (defined($chapter)) {
@@ -40,9 +39,9 @@ if (defined($chapter) || defined($chapterfile)) {
   } else {
     $chapter = 1;
   }
-  $pdflatex = "xelatex -jobname=$chapterfile %O \"\\RequirePackage[pdf]{layout/hp-book}\\begin{document}\\setcounter{chapter}{" . ($chapter - 1) . "}\\input{$chapterfile}\\end{document}\"";
+  $xelatex = "xelatex -jobname=$chapterfile %O \"\\RequirePackage[pdf]{layout/hp-book}\\begin{document}\\setcounter{chapter}{" . ($chapter - 1) . "}\\input{$chapterfile}\\end{document}\"";
 }
-$pdf_mode = 1;
+$pdf_mode = 5;
 $postscript_mode = $dvi_mode = 0;
 
 # Make our fonts available to TeX
