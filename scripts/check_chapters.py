@@ -140,7 +140,7 @@ def fix_line(s: str) -> str:
     # simple and safe
     s = fix_spaces(s)
     s = fix_latex(s)
-    s = fix_dots(s)
+    s = fix_ellipsis(s)
     s = fix_MrMrs(s)
     s = fix_numbers(s)
     s = fix_common_typos(s)
@@ -214,53 +214,23 @@ assert fix_latex("new line after \\\\ asdf") == "new line after \\\\\nasdf"
 assert fix_latex("no new line after \\\\") == "no new line after \\\\"
 
 
-def fix_dots(s: str) -> str:
+def fix_ellipsis(s: str) -> str:
+    """Fix spaces around ellipsis."""
     # ... -> …
     s = s.replace("...", "…")
-    # ... with spaces around
-    s = s.replace(" … ", "…")
-    # NOT '… ' as in ', no… “I'
-    # s = re.sub(r" *… *", r"…", s)
-    # … at start of line
-    s = re.sub(r"^ *… *", r"…", s)
-    # … at end of line
-    s = re.sub(r" *… *$", r"…", s)
-    # before comma
-    s = s.replace(" …,", "…,")
+    # remove all spaces around ellipsis
+    s = re.sub(r" *… *", r"…", s)
 
-    if settings["lang"] == "EN":
-        # … at end of quotation ' …"' -> '…"'
-        s = s.replace(" …”", "…”")
-        # "… " but not before “
-        s = re.sub(r"… (?!“)", r"…", s)
-        # " …" but after punctuation
-        s = re.sub(r"(?<!(%|,|\.|!|\?|:)) …", r"…", s)  # … at start of line
-    if settings["lang"] == "DE":
-        # … at end of quotation ' …"' -> '…"'
-        s = s.replace(" …“", "…“")
-        # "… " but not before „
-        s = re.sub(r"… (?!„)", r"…", s)
-        # " …" but after punctuation
-        s = re.sub(r"(?<!(%|,|\.|!|\?|:)) …", r"…", s)
-    #  keep space between . or , and …
-    s = re.sub(r"([,\.!\?])…", r"\1 …", s)
-
+    # after punctuation: add space
+    s = re.sub(r"(?<=[\.\?!:,;])…", r" …", s)
     return s
 
 
-assert fix_dots("bad...dots") == "bad…dots"
-assert fix_dots("bad … dots") == "bad…dots"
-assert fix_dots("bad.…dots") == "bad. …dots"
-assert fix_dots("bad. …dots") == "bad. …dots"
-assert fix_dots("bad, …dots") == "bad, …dots"
-assert fix_dots("bad! …dots") == "bad! …dots"
-assert fix_dots("bad? …dots") == "bad? …dots"
-assert fix_dots(" … dots") == "…dots"
-assert fix_dots("some … ") == "some…"
-
-if settings["lang"] == "DE":
-    assert fix_dots("bad… dots") == "bad…dots"
-    assert fix_dots("bad… „dots") == "bad… „dots"
+assert fix_ellipsis("foo...bar") == "foo…bar"
+assert fix_ellipsis("foo … bar") == "foo…bar"
+assert fix_ellipsis("foo… bar") == "foo…bar"
+assert fix_ellipsis("foo …bar") == "foo…bar"
+assert fix_ellipsis("foo, …") == "foo, …"
 
 
 def fix_MrMrs(s: str) -> str:  # noqa: N802
