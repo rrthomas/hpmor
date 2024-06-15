@@ -92,9 +92,6 @@ if __name__ == "__main__":
     # fix spaces around ellipsis
     cont = fix_ellipsis(cont)
 
-    # remove bad span ids (containing spaces) from newspaper spans
-    cont = re.sub(r'<span id="[^"]+" label="[^"]+">', r"<span>", cont, count=5)
-
     # doc structure (not needed any more, using calibi --level1-toc flag instead)
     # sed -i 's/<h1 /<h1 class="part"/g' $target_file
     # sed -i 's/<h2 /<h2 class="chapter"/g' $target_file

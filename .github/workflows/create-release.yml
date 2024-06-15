@@ -7,7 +7,7 @@ on:
       version_number:
         description: "Version number"
         required: true
-        default: "v1.2.9"
+        default: "v1.2.12"
       version_text:
         description: "Description"
         required: true
@@ -77,6 +77,7 @@ jobs:
           prerelease: false
           files: |
             ./hpmor*.pdf
+            ./hpmor.html
             ./hpmor.epub
             ./hpmor.mobi
             ./hpmor.fb2

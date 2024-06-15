@@ -73,10 +73,10 @@
 \textsc{#1}%
 }
 
+\newcommand{\newspaperHeader}[1]{\begin{SingleSpace}\upshape #1\end{SingleSpace}}
+\newcommand{\newspaperName}[1]{\upshape\itshape #1}
+
 \newenvironment{headlines}{%
-  \newcommand{\header}[1]{\begin{SingleSpace}\upshape ##1\end{SingleSpace}}
-  \let\hmorSavedLabel\label
-  \renewcommand{\label}[1]{{\upshape\itshape ##1}}%
   \begin{Spacing}{0.75}
   \begin{center}
   \scshape
@@ -84,7 +84,6 @@
 }{
   \end{center}
   \end{Spacing}
-  \let\label\hmorSavedLabel
 }
 
 
