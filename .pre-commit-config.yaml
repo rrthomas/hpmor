@@ -62,7 +62,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.4.4"
+    rev: "v0.6.1"
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
@@ -84,7 +84,7 @@ repos:
       - id: text-unicode-replacement-char
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.40.0
+    rev: v0.41.0
     hooks:
       - id: markdownlint
         args: ["--disable", "MD013"]

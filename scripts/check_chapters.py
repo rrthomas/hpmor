@@ -48,11 +48,11 @@ def get_list_of_chapter_files() -> list[Path]:
     """
     Read hpmor.tex, extract list of (not-commented out) chapter files.
 
-    returns list of filesnames
+    returns list of filenames
     """
     list_of_files: list[Path] = []
     with Path("hpmor.tex").open(encoding="utf-8") as fh:
-        for line in fh.readlines():
+        for line in fh:
             my_match = re.search(r"^.*include\{(chapters/.+?)\}.*$", line)
             if my_match:
                 include_path = my_match.group(1)
