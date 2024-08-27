@@ -51,7 +51,7 @@ if __name__ == "__main__":
     cont = re.sub(r"\\clearpage(\{\}|)\n?", "", cont)
 
     # \vskip 1\baselineskip plus .5\textheight minus 1\baselineskip
-    cont = re.sub(r"\\vskip .*?\\baselineskip", "", cont)
+    cont = re.sub(r"\\vskip .*\\baselineskip", "", cont)
 
     # remove \settowidth{\versewidth}... \begin{verse}[\versewidth]
     cont = re.sub(
