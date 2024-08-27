@@ -25,6 +25,16 @@ if __name__ == "__main__":
     date_str = dt.datetime.now(dt.UTC).date().strftime("%d.%m.%Y")
     cont = cont.replace("\\today{}", date_str)
 
+    # empty the newenvironments: headlines, writtenNote, playdialog
+    #  to prevent implications on other cleanup scripts
+    cont = re.sub(
+        r"\\newenvironment\{(headlines|writtenNote|playdialog)\}.*?\n\n",
+        r"\\newenvironment{\1}{}{}\n\n",
+        cont,
+        flags=re.DOTALL,
+        count=3,
+    )
+
     # writtenNote env -> \writtenNoteA
     cont = re.sub(
         r"\s*\\begin\{writtenNote\}\s*(.*?)\s*\\end\{writtenNote\}",
