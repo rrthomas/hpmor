@@ -65,16 +65,36 @@ jobs:
           ebook-convert --version
           python3 --version
 
+      - name: Download previous hpmor.html
+        run: |
+          wget --quiet https://github.com/rrthomas/hpmor/releases/tag/WorkInProgress/hpmor.html -O hpmor-prev.html
+
       - name: Make PDFs
         run: sh scripts/make_pdfs.sh > /dev/null
 
       - name: Make eBooks
         run: sh scripts/make_ebooks.sh
 
+      - name: Compare to previous hpmor.html
+        run: |
+          diff -u hpmor-prev.html hpmor.html > hpmor-html-diff.log || :
+          rm hpmor-prev.html
+
       - name: Test ls after
         run: |
           pwd
           ls -al
+
+      - name: Upload eBooks as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ebooks
+          path: |
+            ./hpmor.pdf
+            ./hpmor.html
+            ./hpmor-html-diff.log
+            ./hpmor.epub
+          retention-days: 14
 
       - name: Upload files to release WorkInProgress
         uses: softprops/action-gh-release@v2
@@ -86,3 +106,5 @@ jobs:
             ./hpmor.epub
             ./hpmor.mobi
             ./hpmor.fb2
+            ./hpmor.html
+            ./hpmor-html-diff.log
