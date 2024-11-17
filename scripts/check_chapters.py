@@ -83,7 +83,6 @@ def process_file(file_in: Path) -> bool:
     returns issues_found = True if we have a finding
     a proposed fix is written to chapters/*-autofix.tex
     """
-    # print(file_in.name)
     issues_found = False
     cont = file_in.read_text(encoding="utf-8")
 
@@ -124,9 +123,7 @@ def process_file(file_in: Path) -> bool:
         if settings["print_diff"]:
             with (
                 file_in.open(encoding="utf-8") as file1,
-                file_out.open(
-                    encoding="utf-8",
-                ) as file2,
+                file_out.open(encoding="utf-8") as file2,
             ):
                 diff = difflib.ndiff(file1.readlines(), file2.readlines())
             delta = "".join(x for x in diff if x.startswith(("+ ", "- ")))
@@ -152,9 +149,9 @@ def fix_line(s: str) -> str:
     s = fix_hyphens(s)
     s = fix_quotations(s)
 
-    # force linebreaks before speach marks
+    # force linebreaks before speech marks
     if settings["lang"] == "DE":
-        s = fix_linebreaks_speach(s)
+        s = fix_linebreaks_speech(s)
 
     # add spell macro
     if settings["lang"] == "DE":
@@ -203,9 +200,9 @@ def fix_latex(s: str) -> str:
     return s
 
 
-def fix_linebreaks_speach(s: str) -> str:
+def fix_linebreaks_speech(s: str) -> str:
     """
-    Add linebreaks before speach marks.
+    Add linebreaks before speech marks.
 
     not in use in EN
     """
@@ -364,11 +361,11 @@ def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
     if settings["lang"] == "EN":
         s = re.sub(r"‘\\emph{([^}]+)}’", r"‘\1’", s)
         s = re.sub(r"\\emph{‘([^}]+)’}", r"‘\1’", s)
-    if settings["lang"] == "EN":
+    if settings["lang"] == "DE":
         s = re.sub(r"‚\\emph{([^}]+)}‘", r"‚\1‘", s)
         s = re.sub(r"\\emph{‚([^}]+)‘}", r"‚\1‘", s)
 
-    # comma at end of emph&quotation
+    # comma at end of emph and quotation
     if settings["lang"] == "EN":
         pass
         # false positives at book titles etc.
