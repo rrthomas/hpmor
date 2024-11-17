@@ -309,11 +309,17 @@ def fix_quotations(s: str) -> str:  # noqa: C901, PLR0912, PLR0915
     if settings["lang"] == "DE":
         s = re.sub(r"…„", r"… „", s)
 
+    # space at opening "
+    if settings["lang"] == "EN":
+        s = re.sub(r"“ +", r"“", s)
+    if settings["lang"] == "DE":
+        s = re.sub(r"„ +", r"„", s)
+
     # space before closing “
     if settings["lang"] == "EN":
-        s = re.sub(r" +”", r"” ", s)
+        s = re.sub(r" +”", r"”", s)
     if settings["lang"] == "DE":
-        s = re.sub(r" +“", r"“ ", s)
+        s = re.sub(r" +“", r"“", s)
 
     # space between "…" and "“"
     # if settings["lang"] == "EN":
