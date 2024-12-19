@@ -23,7 +23,7 @@ if (-d $hooks_dir) {
       my $mode = (stat($hook))[2];
       chmod $mode | 0111, $hook;
     }
-    system "git", "checkout", "main"; # Generate .git/gitHeadInfo.gin
+    system "git", "checkout"; # Generate .git/gitHeadInfo.gin
   }
 }
 
