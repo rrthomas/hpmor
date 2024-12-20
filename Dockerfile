@@ -7,17 +7,17 @@ FROM ubuntu:24.04
 ENV TZ=Europe/Berlin
 
 # prevent keyboard input requests in apt install
-ARG DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # install core packages
-RUN apt-get update
-RUN apt-get dist-upgrade -y
-RUN apt-get install -y python3 git
+RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y python3 git
 
 # for pdf, copied from scripts/install_requirements_pdf.sh
-RUN apt-get install -y texlive-xetex texlive-lang-greek texlive-lang-german latexmk
 # for ebook, copied from scripts/install_requirements_ebook.sh
-RUN apt-get install -y texlive-extra-utils pandoc calibre imagemagick ghostscript
+RUN apt-get install -y texlive-xetex texlive-lang-greek texlive-lang-german latexmk texlive-extra-utils pandoc calibre imagemagick ghostscript
+
+# cleanup apt
+RUN apt-get clean autoclean && apt-get autoremove --yes && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # set working directory
 WORKDIR /app
