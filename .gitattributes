@@ -1,0 +1,11 @@
+*.css text eol=lf diff=css
+*.json text eol=lf
+*.md text eol=lf diff=markdown
+*.py text eol=lf diff=python
+*.sh text eol=lf
+*.tex text eol=lf
+*.toml text eol=lf
+*.txt text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+LICENSE text eol=lf
