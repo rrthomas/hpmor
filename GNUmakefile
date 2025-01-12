@@ -9,6 +9,13 @@ ZIPFILE = $(PROJECT)-$(VERSION).zip
 
 all: ebooks pdf
 
+.PHONY: all
+
+clean:
+	latexmk -C
+
+.PHONY: clean
+
 pdf:
 	latexmk
 
