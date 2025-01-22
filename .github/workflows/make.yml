@@ -67,7 +67,7 @@ jobs:
 
       - name: Download previous hpmor.html
         run: |
-          wget --quiet https://github.com/${{ github.repository }}/releases/tag/WorkInProgress/hpmor.html -O hpmor-prev.html
+          wget --quiet https://github.com/${{ github.repository }}/releases/download/WorkInProgress/hpmor.html -O hpmor-prev.html
 
       - name: Make PDFs
         run: sh scripts/make_pdfs.sh > /dev/null
@@ -77,7 +77,7 @@ jobs:
 
       - name: Compare to previous hpmor.html
         run: |
-          diff -u hpmor-prev.html hpmor.html > hpmor-html-diff.log || :
+          diff -u -s hpmor-prev.html hpmor.html > hpmor-html-diff.log || :
           rm hpmor-prev.html
 
       - name: Test ls after
