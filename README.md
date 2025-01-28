@@ -3,7 +3,7 @@
 <https://github.com/rrthomas/hpmor>
 Maintainer: Reuben Thomas <rrt@sc3d.org>
 
-A LaTeX version of [the popular didactic fan-fiction](http://www.hpmor.com)
+A LaTeX version of [the popular didactic fan-fiction](https://www.hpmor.com)
 by Eliezer Yudkowsky, which can make e-books in PDF, ePub and Mobi formats,
 and six PDF volumes that can be printed and bound. There are also dust
 jackets for the printable volumes.
