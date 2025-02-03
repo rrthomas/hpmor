@@ -25,9 +25,9 @@ def test_it(fct: Callable, pairs: list[tuple[str, str]]) -> None:
         # test of isolated function
         assert fct(text) == expected_output, f"'{fct(text)}' != '{expected_output}'"
         # test in complete fix_line context
-        assert (
-            fix_line(text) == expected_output
-        ), f"'{fix_line(text)}' != '{expected_output}'"
+        assert fix_line(text) == expected_output, (
+            f"'{fix_line(text)}' != '{expected_output}'"
+        )
 
 
 for lang in ["EN", "DE"]:
