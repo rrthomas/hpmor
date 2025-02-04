@@ -9,9 +9,9 @@ ENV TZ=Europe/Berlin
 # prevent keyboard input requests in apt install
 ENV DEBIAN_FRONTEND=noninteractive
 
-# install core packages and other dependencies
+# install packages and cleanup afterwards
 RUN apt-get update && apt-get dist-upgrade -y && \
-    apt-get install -y python3 git texlive-xetex texlive-lang-greek texlive-lang-german latexmk texlive-extra-utils pandoc calibre imagemagick ghostscript && \
+    apt-get install -y python3 python3-lxml git texlive-xetex texlive-lang-greek texlive-lang-german latexmk texlive-extra-utils pandoc calibre imagemagick ghostscript && \
     apt-get clean autoclean && apt-get autoremove --yes && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # set working directory

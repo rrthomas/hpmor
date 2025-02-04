@@ -1,5 +1,6 @@
 # This manually started workflow builds PDFs and eBooks and creates a new release with these assets.
-name: "Create Release"
+
+name: Create Release
 
 on:
   workflow_dispatch: # manual triggering
@@ -31,9 +32,6 @@ jobs:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
-      - name: Touch requirements.txt for pip caching
-        run: touch requirements.txt
-
       - name: Cache LaTeX files
         uses: actions/cache@v4
         with:
@@ -47,6 +45,9 @@ jobs:
             hpmor*.toc
             hpmor*.xdv
           key: tex-cache
+
+      - name: Preparations
+        run: ln -s python-requirements.txt requirements.txt
 
       - name: Python set up
         uses: actions/setup-python@v5
@@ -63,11 +64,31 @@ jobs:
       - name: Install requirements
         run: sh scripts/install_requirements.sh > /dev/null
 
+      - name: Download previous hpmor.html
+        run: |
+          wget --quiet https://github.com/${{ github.repository }}/releases/download/WorkInProgress/hpmor.html -O hpmor-prev.html
+
       - name: Make PDFs
         run: sh scripts/make_pdfs.sh > /dev/null
 
       - name: Make eBooks
         run: sh scripts/make_ebooks.sh
+
+      - name: Compare to previous hpmor.html
+        run: |
+          diff -u -s hpmor-prev.html hpmor.html > hpmor-html-diff.log || :
+          rm hpmor-prev.html
+
+      - name: Upload eBooks as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ebooks
+          path: |
+            ./hpmor-html-diff.log
+            ./hpmor.epub
+            ./hpmor.html
+            ./hpmor.pdf
+          retention-days: 14
 
       - name: Publish release
         uses: softprops/action-gh-release@v2
@@ -76,8 +97,8 @@ jobs:
           body: "${{ inputs.version_text }}"
           prerelease: false
           files: |
-            ./hpmor*.pdf
-            ./hpmor.html
             ./hpmor.epub
-            ./hpmor.mobi
             ./hpmor.fb2
+            ./hpmor.html
+            ./hpmor.mobi
+            ./hpmor*.pdf

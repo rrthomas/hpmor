@@ -23,8 +23,8 @@ jobs:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
-      - name: Touch requirements.txt for pip caching
-        run: touch requirements.txt
+      - name: Preparations
+        run: ln -s python-requirements.txt requirements.txt
 
       - name: Python set up
         uses: actions/setup-python@v5
