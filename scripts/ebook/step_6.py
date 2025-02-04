@@ -53,6 +53,15 @@ if __name__ == "__main__":
         count=1,
     )
 
+    # stray </div> leftover
+    cont = re.sub(
+        r"(https://github.com/rrthomas/hpmor/</a></p>)\s+</div>",
+        r"\1",
+        cont,
+        flags=re.DOTALL | re.IGNORECASE,
+        count=1,
+    )
+
     # cleanup hp-intro leftovers
     cont = re.sub(
         """<p>Fanfiction based on the characters of</p>
