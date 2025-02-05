@@ -91,7 +91,7 @@ if __name__ == "__main__":
     cont = re.sub("<p>Year at Hogwarts</p>\n", "", cont, count=7)
     cont = re.sub(
         "</em></p>\n<p><em>Harry Potter and the",
-        "<br>\nHarry Potter and the",
+        "<br />\nHarry Potter and the",
         cont,
         count=7,
     )

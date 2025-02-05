@@ -1,0 +1,171 @@
+# This workflow performs
+# check: Quality checks on chapter text and code upon new commits and PRs.
+# make: Makes PDFs and eBooks if .tex files have changed.
+# upload: Uploads the artifacts to release WorkInProgress, but only for push into main branch.
+
+name: Check and Make
+
+# This workflow runs upon
+# - manual triggering
+# - create new PR (check, make)
+# - push to main (check, make, upload)
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: ["main"]
+  push:
+    branches: ["main"]
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    outputs:
+      cache-hit: ${{ steps.cache-lookup.outputs.cache-hit }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1 # 0 if you want to push to repo
+
+      - name: Calculate hash on chapters/*.tex
+        id: calculate-hash
+        run: |
+          echo "hash=${{ hashFiles('chapters/*.tex') }}" >> $GITHUB_OUTPUT
+          touch hash-chapters.txt
+
+      - name: Cache lookup
+        id: cache-lookup
+        uses: actions/cache@v4
+        with:
+          path: hash-chapters.txt
+          key: chapter-hash-for-ebook-${{ github.ref_name }}-${{ steps.calculate-hash.outputs.hash }}
+
+      - name: Preparations
+        run: ln -s python-requirements.txt requirements.txt
+
+      - name: Python set up
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Check chapters for known issues
+        run: python3 -O scripts/check_chapters.py
+
+      - name: Check pre-commit tests
+        uses: pre-commit/action@v3.0.1
+
+  make:
+    needs: check
+    # do not run for unchanged tex files
+    if: needs.check.outputs.cache-hit != 'true'
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1 # 0 if you want to push to repo
+
+      - name: Cache LaTeX files
+        uses: actions/cache@v4
+        with:
+          path: |
+            chapters/*.aux
+            hpmor*.aux
+            hpmor*.fdb_latexmk
+            hpmor*.fls
+            hpmor*.out
+            hpmor*.pdf
+            hpmor*.toc
+            hpmor*.xdv
+          key: tex-cache
+
+      - name: Preparations
+        run: ln -s python-requirements.txt requirements.txt
+
+      - name: Python set up
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install requirements (apt and python)
+        run: sh scripts/install_requirements.sh > /dev/null
+
+      - name: Print versions
+        run: |
+          cat /etc/os-release
+          xelatex -v
+          latexmk -v
+          calibre --version
+          pandoc --version
+          ebook-convert --version
+          python3 --version
+
+      - name: Download previous hpmor.html
+        run: |
+          wget --quiet https://github.com/${{ github.repository }}/releases/download/WorkInProgress/hpmor.html -O hpmor-prev.html
+
+      - name: Make PDFs
+        run: sh scripts/make_pdfs.sh > /dev/null
+
+      - name: Make eBooks
+        run: sh scripts/make_ebooks.sh
+
+      - name: Compare to previous hpmor.html
+        run: |
+          diff -u -s hpmor-prev.html hpmor.html > hpmor-html-diff.log || :
+          rm hpmor-prev.html
+
+      - name: ls after
+        run: |
+          pwd
+          ls -al
+
+      - name: Upload eBooks as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ebooks
+          path: |
+            ./hpmor-html-diff.log
+            ./hpmor.epub
+            ./hpmor.fb2
+            ./hpmor.html
+            ./hpmor.mobi
+            ./hpmor.pdf
+          retention-days: 14
+
+  #
+  # upload to release WorkInProgress
+  #
+  upload:
+    needs: make
+    # only for push into main branch
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Download eBooks artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ebooks
+
+      - name: Publish eBooks to release WorkInProgress
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: WorkInProgress
+          prerelease: true
+          files: |
+            ./hpmor-html-diff.log
+            ./hpmor.epub
+            ./hpmor.fb2
+            ./hpmor.html
+            ./hpmor.mobi
+            ./hpmor*.pdf
