@@ -108,20 +108,17 @@ jobs:
           ebook-convert --version
           python3 --version
 
-      - name: Download previous hpmor.html
-        run: |
-          wget --quiet https://github.com/${{ github.repository }}/releases/download/WorkInProgress/hpmor.html -O hpmor-prev.html
-
       - name: Make PDFs
         run: sh scripts/make_pdfs.sh > /dev/null
 
       - name: Make eBooks
-        run: sh scripts/make_ebooks.sh
+        run: |
+          wget --quiet https://github.com/${{ github.repository }}/releases/latest/download/hpmor.html -O hpmor-prev.html
+          sh scripts/make_ebooks.sh
 
       - name: Compare to previous hpmor.html
         run: |
-          diff -u -s hpmor-prev.html hpmor.html > hpmor-html-diff.log || :
-          rm hpmor-prev.html
+          diff -U 0 -s hpmor-prev.html hpmor.html > hpmor-html-diff.log || :
 
       - name: ls after
         run: |

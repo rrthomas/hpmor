@@ -14,3 +14,4 @@ python3 scripts/ebook/step_4.py
 sh scripts/ebook/step_5.sh
 python3 scripts/ebook/step_6.py
 sh scripts/ebook/step_7.sh
+echo optionally run scripts/ebook/step_8.sh to compare HTML to latest release
