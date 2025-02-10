@@ -150,8 +150,7 @@ def fix_line(s: str) -> str:
     s = fix_quotations(s)
 
     # force linebreaks before speech marks
-    if settings["lang"] == "DE":
-        s = fix_linebreaks_speech(s)
+    s = fix_linebreaks_speech(s)
 
     # add spell macro
     if settings["lang"] == "DE":
@@ -207,7 +206,7 @@ def fix_linebreaks_speech(s: str) -> str:
     not in use in EN
     """
     if settings["lang"] == "EN":
-        return s
+        s = re.sub(r" “([A-Z])", r"\n“\1", s)
 
     if settings["lang"] == "DE":
         s = re.sub(r" „([A-Z])", r"\n„\1", s)
