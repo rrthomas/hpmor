@@ -95,17 +95,7 @@ jobs:
           python-version: "3.12"
           cache: "pip"
 
-      # https://github.com/abbbi/github-actions-tune/blob/master/speedup.sh
-      - run: sudo sed -i 's/yes/no/g' '/etc/initramfs-tools/update-initramfs.conf'
-      - run: sudo rm -f /var/lib/man-db/auto-update
-      - run: sudo sed '/fontconfig/d' -i '/var/lib/dpkg/triggers/File'
-      - run: sudo sed '/install-info/d' -i '/var/lib/dpkg/triggers/File'
-      - run: sudo sed '/mime/d' -i '/var/lib/dpkg/triggers/File'
-      - run: sudo sed '/hicolor-icon-theme/d' -i '/var/lib/dpkg/triggers/File'
-      - run: echo "force-unsafe-io" | sudo tee -a /etc/dpkg/dpkg.cfg.d/force-unsafe-io
-      - run: echo -e '#!/bin/sh\nexec eatmydata /usr/bin/dpkg $@' | sudo tee /usr/local/bin/dpkg && sudo chmod +x /usr/local/bin/dpkg
-      - run: echo -e '#!/bin/sh\nexec eatmydata /usr/bin/apt $@' | sudo tee /usr/local/bin/apt && sudo chmod +x /usr/local/bin/apt
-      - run: echo -e '#!/bin/sh\nexec eatmydata /usr/bin/apt-get $@' | sudo tee /usr/local/bin/apt-get && sudo chmod +x /usr/local/bin/apt-get
+      - uses: abbbi/github-actions-tune@v1
 
       - name: Install requirements (apt and python)
         run: sh scripts/install_requirements.sh > /dev/null
