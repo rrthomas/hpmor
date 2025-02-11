@@ -95,6 +95,9 @@ jobs:
           python-version: "3.12"
           cache: "pip"
 
+      - name: Speed up apt-get steps
+        uses: abbbi/github-actions-tune@v1
+
       - name: Install requirements (apt and python)
         run: sh scripts/install_requirements.sh > /dev/null
 

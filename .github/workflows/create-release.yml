@@ -61,6 +61,9 @@ jobs:
       - name: Check pre-commit tests
         uses: pre-commit/action@v3.0.1
 
+      - name: Speed up apt-get steps
+        uses: abbbi/github-actions-tune@v1
+
       - name: Install requirements
         run: sh scripts/install_requirements.sh > /dev/null
 
