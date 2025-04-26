@@ -85,4 +85,4 @@ repos:
         args: ["--disable", "MD013"]
 
 default_language_version:
-  python: python3.12
+  python: python3.13

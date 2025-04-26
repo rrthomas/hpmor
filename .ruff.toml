@@ -1,6 +1,6 @@
 fix = true               # auto-fix findings
 line-length = 88         # same as Black
-target-version = "py312" # Python 3.12
+target-version = "py313" # Python 3.13
 
 [lint]
 # comment this out to use only default rules (["E4", "E7", "E9", "F"])
