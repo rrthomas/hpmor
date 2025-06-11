@@ -7,9 +7,13 @@
 # update hooks to latest version
 #  pre-commit autoupdate
 
+default_language_version:
+  python: python3.13
+
 exclude: |
   (?x)^(
-    scripts/ebook/v1.*|
+    fonts/.*|
+    scripts/ebook/v1/.*
   )$
 
 repos:
@@ -23,6 +27,7 @@ repos:
       - id: check-case-conflict
       - id: check-docstring-first
       - id: check-executables-have-shebangs
+      # - id: check-illegal-windows-names
       - id: check-json
       - id: check-merge-conflict
       - id: check-shebang-scripts-are-executable
@@ -38,51 +43,43 @@ repos:
       # conflict with black below
       # - id: double-quote-string-fixer
       - id: end-of-file-fixer
-      - id: file-contents-sorter
+      # - id: file-contents-sorter
+      #   files: ^(deploy-whitelist.txt|\.gitignore|\.dockerignore)$
       - id: fix-byte-order-marker
       - id: fix-encoding-pragma
         args: ["--remove"]
       - id: forbid-new-submodules
       # - id: forbid-submodules
-      #   args: ['--fix=lf']
       - id: mixed-line-ending
+        args: ["--fix=lf"]
       - id: name-tests-test
+        args: ["--pytest-test-first"]
       # - id: no-commit-to-branch
       #   args: [--branch, staging]
-      # not, since it decodes utf-8
-      # - id: pretty-format-json
-      #   args: ["--autofix"]
+      - id: pretty-format-json
+        args: ["--autofix", "--no-ensure-ascii", "--no-sort-keys"]
       - id: requirements-txt-fixer
       # - id: sort-simple-yaml
+      #  files: ^config/simple/
       - id: trailing-whitespace
 
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.9.4"
+  # ruff
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.8
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
       - id: ruff-format
 
-  - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.10.0
+  # security
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.27.2
     hooks:
-      - id: python-check-blanket-noqa
-      # not, since '# type: ignore' is ok for me
-      # - id: python-check-blanket-type-ignore
-      - id: python-check-mock-methods
-      - id: python-no-eval
-      - id: python-no-log-warn
-      - id: python-use-type-annotations
-      - id: rst-backticks
-      - id: rst-directive-colons
-      - id: rst-inline-touching-normal
-      - id: text-unicode-replacement-char
+      - id: gitleaks
 
+  # markdown
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.44.0
+    rev: v0.45.0
     hooks:
       - id: markdownlint
         args: ["--disable", "MD013"]
-
-default_language_version:
-  python: python3.13
