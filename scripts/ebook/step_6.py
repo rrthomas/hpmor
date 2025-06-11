@@ -23,7 +23,7 @@ def check_html(cont: str) -> None:
     """Check html syntax."""
     parser = etree.XMLParser(recover=False)  # Do not auto-fix errors
     try:
-        etree.fromstring(cont, parser)  # noqa: S320
+        etree.fromstring(cont, parser)
     except etree.XMLSyntaxError as e:
         print("HTML Error:", e)
         sys.exit(1)
