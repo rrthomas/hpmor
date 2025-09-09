@@ -47,7 +47,7 @@ jobs:
         run: ln -s python-requirements.txt requirements.txt
 
       - name: Python set up
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
           cache: "pip"
@@ -90,7 +90,7 @@ jobs:
         run: ln -s python-requirements.txt requirements.txt
 
       - name: Python set up
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
           cache: "pip"
