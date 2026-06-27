@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
@@ -38,7 +38,7 @@ jobs:
 
       - name: Cache lookup
         id: cache-lookup
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: hash-chapters.txt
           key: chapter-hash-for-ebook-${{ github.ref_name }}-${{ steps.calculate-hash.outputs.hash }}
@@ -67,13 +67,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
       - name: Cache LaTeX files
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             chapters/*.aux
@@ -129,7 +129,7 @@ jobs:
           ls -al
 
       - name: Upload eBooks as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ebooks
           path: |
@@ -153,12 +153,12 @@ jobs:
 
     steps:
       - name: Download eBooks artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: ebooks
 
       - name: Publish eBooks to release WorkInProgress
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: WorkInProgress
           prerelease: true

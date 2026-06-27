@@ -27,13 +27,13 @@ jobs:
       # steps are copied from make.yml
 
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
       - name: Cache LaTeX files
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             chapters/*.aux
@@ -83,7 +83,7 @@ jobs:
           rm hpmor-prev.html
 
       - name: Upload eBooks as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ebooks
           path: |
@@ -94,7 +94,7 @@ jobs:
           retention-days: 14
 
       - name: Publish release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: "${{ inputs.version_number }}"
           body: "${{ inputs.version_text }}"
