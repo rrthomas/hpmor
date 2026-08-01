@@ -63,7 +63,7 @@ repos:
 
   # ruff
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.10
+    rev: v0.16.4
     hooks:
       - id: ruff-check
         args: [--fix, --exit-non-zero-on-fix]
@@ -71,13 +71,13 @@ repos:
 
   # security
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.30.0
+    rev: v8.30.1
     hooks:
       - id: gitleaks
 
   # markdown
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.47.0
+    rev: v0.49.1
     hooks:
       - id: markdownlint
         args: ["--disable", "MD013"]

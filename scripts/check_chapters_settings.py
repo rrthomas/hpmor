@@ -1,4 +1,4 @@
-# ruff: # noqa: INP001
+# ruff: noqa: INP001
 
 """
 Settings.
