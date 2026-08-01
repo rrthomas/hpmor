@@ -16,6 +16,7 @@ fixable = ["ALL"] # fix for all enabled rules
 # rule not to apply
 extend-ignore = [
     "COM812", # missing-trailing-comma,
+    "CPY001", # copyright
     "D200",   # fits-on-one-line"
     "D203",   # incorrect-blank-line-before-class
     "D211",   # blank-line-before-class
