@@ -16,7 +16,9 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    runs-on: ubuntu-26.04
 
     steps:
       # - name: test print
@@ -27,13 +29,13 @@ jobs:
       # steps are copied from make.yml
 
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 1 # 0 if you want to push to repo
 
       - name: Cache LaTeX files
-        uses: actions/cache@v5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
         with:
           path: |
             chapters/*.aux
@@ -50,19 +52,19 @@ jobs:
         run: ln -s python-requirements.txt requirements.txt
 
       - name: Python set up
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
         with:
-          python-version: "3.13"
+          python-version-file: ".python-version"
           cache: "pip"
 
       - name: Check chapters for known issues
         run: python3 scripts/check_chapters.py
 
       - name: Check pre-commit tests
-        uses: pre-commit/action@v3.0.1
+        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd  # v3.0.1
 
       - name: Speed up apt-get steps
-        uses: abbbi/github-actions-tune@v1
+        uses: abbbi/github-actions-tune@81fb919e588c20b7ab52b2cac097d2efd765c714  # v1
 
       - name: Install requirements
         run: sh scripts/install_requirements.sh > /dev/null
@@ -83,7 +85,7 @@ jobs:
           rm hpmor-prev.html
 
       - name: Upload eBooks as artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
         with:
           name: ebooks
           path: |
@@ -94,7 +96,7 @@ jobs:
           retention-days: 14
 
       - name: Publish release
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64  # v3.0.3
         with:
           tag_name: "${{ inputs.version_number }}"
           body: "${{ inputs.version_text }}"
