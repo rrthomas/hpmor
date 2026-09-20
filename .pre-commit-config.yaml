@@ -8,12 +8,12 @@
 #  pre-commit autoupdate
 
 default_language_version:
-  python: python3.13
+  python: python3.14
 
 exclude: |
   (?x)^(
-    fonts/.*|
-    scripts/ebook/v1/.*
+    .vscode/.*
+    |fonts/.*
   )$
 
 repos:
