@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # base image
-FROM ubuntu:24.04
+FROM ubuntu:26.04
 
 # set timezone
 ENV TZ=Europe/Berlin
@@ -10,15 +10,33 @@ ENV TZ=Europe/Berlin
 ENV DEBIAN_FRONTEND=noninteractive
 
 # install packages and cleanup afterwards
+# keep the package list in sync with scripts/install_requirements.sh (that one uses sudo, so not reusable here)
 RUN apt-get update && apt-get dist-upgrade -y && \
-    apt-get install -y python3 python3-lxml git texlive-xetex texlive-lang-greek texlive-lang-german latexmk texlive-extra-utils pandoc calibre imagemagick ghostscript && \
-    apt-get clean autoclean && apt-get autoremove --yes && rm -rf /var/lib/{apt,dpkg,cache,log}/
+    apt-get install -y \
+    calibre \
+    ghostscript \
+    git \
+    imagemagick \
+    latexmk \
+    pandoc \
+    python3 \
+    python3-lxml \
+    python3-pytest \
+    texlive-extra-utils \
+    texlive-lang-german \
+    texlive-lang-greek \
+    texlive-xetex && \
+    apt-get clean autoclean && \
+    apt-get autoremove --yes && \
+    rm -rf /var/lib/apt/lists/* && \
+    (userdel -r ubuntu || true) && \
+    useradd -m -u 1000 -s /bin/bash app
+
+# switch to non-root user (uid 1000 = typical host uid, so bind-mounted files stay writable on Linux)
+USER app
 
 # set working directory
 WORKDIR /app
-
-# mount host directory as volume
-VOLUME /app
 
 # default command: build 1-vol pdf and all ebook formats
 # CMD latexmk hpmor ; ./scripts/make_ebooks.sh
