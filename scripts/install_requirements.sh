@@ -1,17 +1,17 @@
 #!/bin/sh
 
 # ensure we are in the hpmor root dir
-script_dir=$(dirname $0)
-cd $script_dir/..
+script_dir=$(dirname "$0")
+cd "$script_dir/.." || exit 1
 
 # update apt list
 sudo apt-get update --fix-missing
 
 # pdf
-sudo apt-get install texlive-xetex texlive-lang-greek latexmk
+sudo apt-get install -y texlive-xetex texlive-lang-greek latexmk
 
 # ebook
-sudo apt-get install pandoc calibre texlive-extra-utils imagemagick ghostscript
+sudo apt-get install -y pandoc calibre texlive-extra-utils imagemagick ghostscript
 # texlive-extra-utils for latexpand
 # imagemagick ghostscript : for pdf title page to image conversion
 

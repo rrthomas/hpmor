@@ -27,5 +27,8 @@ test_cases = [
     ("foo…<em>bar", "foo… <em>bar"),
 ]
 
-for inp, exp in test_cases:
-    assert fix_ellipsis(inp) == exp, fix_ellipsis(inp)
+
+def test_fix_ellipsis() -> None:
+    """Test fix_ellipsis."""
+    for inp, exp in test_cases:
+        assert fix_ellipsis(inp) == exp, fix_ellipsis(inp)

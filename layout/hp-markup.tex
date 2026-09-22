@@ -31,8 +31,7 @@
 %
 % new FR version of parsel by yeKcim
 % note: Other commands, such as \emph, cannot be used inside \parsel
-\newcommand{\parselb}[1]{\parselify{\fontspec[ExternalLocation]{Parseltongue.ttf}#1}%
-{\ptsansi\parssselstring}}
+\newcommand{\parselb}[1]{{\fontspec[ExternalLocation]{Parseltongue.ttf}#1}} % no \parselify (can’t convert to epub)
 %
 % select one of above
 \newcommand{\parsel}[1]{\parsela{#1}}
