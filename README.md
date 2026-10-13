@@ -189,10 +189,10 @@ It is recommended to use `polyglossia` (not `babel`).
 Note: there are other translations of HPMOR; here are listed only
 translations of this edition.
 
-* [French](https://github.com/kamaradclimber/hpmor) (complete, based on [this one](https://github.com/yeKcim/hpmor))
-* [German](https://github.com/entorb/hpmor-de) (complete)
+* French: [kamaradclimber/hpmor](https://github.com/kamaradclimber/hpmor) and [yeKcim/hpmor](https://github.com/yeKcim/hpmor)
+* [German](https://github.com/entorb/hpmor-de)
+* [Vietnamese](https://github.com/MarkKoro/hpmor-vietnamese)
 * [Esperanto](https://github.com/norwd/hpmor) (in progress)
-  [![milestone details](https://img.shields.io/github/milestones/progress/norwd/hpmor/1?label=Chapters%20Completed)](https://github.com/norwd/hpmor/releases/tag/LaboroEnProgreso)
 
 <!--  LocalWords:  hpmor tex hp txt latexmkrc latexmk GNUMakefile 80gsm '
  -->
