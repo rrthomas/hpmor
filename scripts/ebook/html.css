@@ -5,6 +5,13 @@ p {
   line-height: 1.25;
 }
 
+/* calibre --filter-css "background-color" would hide hr drawn via background */
+hr {
+  height: 0;
+  border: 0;
+  border-top: 1px solid;
+}
+
 em {
   font-style: italic;
 }
