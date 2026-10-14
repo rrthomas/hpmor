@@ -1,9 +1,10 @@
+---
 # This manually started workflow builds PDFs and eBooks and creates a new release with these assets.
 
 name: Create Release
 
 on:
-  workflow_dispatch: # manual triggering
+  workflow_dispatch:  # manual triggering
     inputs:
       version_number:
         description: "Version number"
@@ -16,9 +17,10 @@ on:
 
 jobs:
   release:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 45
     permissions:
       contents: write
-    runs-on: ubuntu-26.04
 
     steps:
       # - name: test print
@@ -32,21 +34,12 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
-          fetch-depth: 1 # 0 if you want to push to repo
+          fetch-depth: 1  # 0 if you want to push to repo
 
-      - name: Cache LaTeX files
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+      - name: Run prek pre-commit
+        uses: j178/prek-action@1382ad72dea72f9d53832f2bcb65b3e87a947204  # v3.0.1
         with:
-          path: |
-            chapters/*.aux
-            hpmor*.aux
-            hpmor*.fdb_latexmk
-            hpmor*.fls
-            hpmor*.out
-            hpmor*.pdf
-            hpmor*.toc
-            hpmor*.xdv
-          key: tex-cache
+          extra-args: '--all-files --quiet'
 
       - name: Preparations
         run: ln -s python-requirements.txt requirements.txt
@@ -55,13 +48,9 @@ jobs:
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
         with:
           python-version-file: ".python-version"
-          cache: "pip"
 
       - name: Check chapters for known issues
         run: python3 scripts/check_chapters.py
-
-      - name: Check pre-commit tests
-        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd  # v3.0.1
 
       - name: Speed up apt-get steps
         uses: abbbi/github-actions-tune@81fb919e588c20b7ab52b2cac097d2efd765c714  # v1
@@ -85,7 +74,7 @@ jobs:
           rm hpmor-prev.html
 
       - name: Upload eBooks as artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
         with:
           name: ebooks
           path: |
@@ -96,14 +85,11 @@ jobs:
           retention-days: 14
 
       - name: Publish release
-        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64  # v3.0.3
-        with:
-          tag_name: "${{ inputs.version_number }}"
-          body: "${{ inputs.version_text }}"
-          prerelease: false
-          files: |
-            ./hpmor.epub
-            ./hpmor.fb2
-            ./hpmor.html
-            ./hpmor.mobi
-            ./hpmor*.pdf
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          VERSION_NUMBER: ${{ inputs.version_number }}
+          VERSION_TEXT: ${{ inputs.version_text }}
+        run: |
+          gh release create "$VERSION_NUMBER" --title "$VERSION_NUMBER" --notes "$VERSION_TEXT" --target ${{ github.sha }} \
+            ./hpmor.epub ./hpmor.fb2 ./hpmor.html ./hpmor.mobi ./hpmor*.pdf

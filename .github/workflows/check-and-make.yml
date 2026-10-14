@@ -1,3 +1,4 @@
+---
 # This workflow performs
 # check: Quality checks on chapter text and code upon new commits and PRs.
 # make: Makes PDFs and eBooks if .tex files have changed.
@@ -21,9 +22,10 @@ permissions: {}
 
 jobs:
   check:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
     permissions:
       contents: read
-    runs-on: ubuntu-26.04
     outputs:
       cache-hit: ${{ steps.cache-lookup.outputs.cache-hit }}
 
@@ -32,7 +34,12 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
-          fetch-depth: 1 # 0 if you want to push to repo
+          fetch-depth: 1  # 0 if you want to push to repo
+
+      - name: Run prek pre-commit
+        uses: j178/prek-action@1382ad72dea72f9d53832f2bcb65b3e87a947204  # v3.0.1
+        with:
+          extra-args: '--all-files --quiet'
 
       - name: Calculate hash on chapters/*.tex
         id: calculate-hash
@@ -59,24 +66,21 @@ jobs:
       - name: Check chapters for known issues
         run: python3 -O scripts/check_chapters.py
 
-      - name: Check pre-commit tests
-        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd  # v3.0.1
-
   make:
     needs: check
+    timeout-minutes: 45
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     # do not run for unchanged tex files
     if: needs.check.outputs.cache-hit != 'true'
-
-    runs-on: ubuntu-26.04
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
-          fetch-depth: 1 # 0 if you want to push to repo
+          fetch-depth: 1  # 0 if you want to push to repo
 
       - name: Cache LaTeX files
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
@@ -135,7 +139,7 @@ jobs:
           ls -al
 
       - name: Upload eBooks as artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
         with:
           name: ebooks
           path: |
@@ -152,28 +156,23 @@ jobs:
   #
   upload:
     needs: make
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
     permissions:
       contents: write
     # only for push into main branch
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
-    runs-on: ubuntu-26.04
-
     steps:
       - name: Download eBooks artifact
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
         with:
           name: ebooks
 
       - name: Publish eBooks to release WorkInProgress
-        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64  # v3.0.3
-        with:
-          tag_name: WorkInProgress
-          prerelease: true
-          files: |
-            ./hpmor-html-diff.log
-            ./hpmor.epub
-            ./hpmor.fb2
-            ./hpmor.html
-            ./hpmor.mobi
-            ./hpmor*.pdf
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release view WorkInProgress || gh release create WorkInProgress --title WorkInProgress --notes "" --prerelease --target ${{ github.sha }}
+          gh release upload WorkInProgress ./hpmor-html-diff.log ./hpmor.epub ./hpmor.fb2 ./hpmor.html ./hpmor.mobi ./hpmor*.pdf --clobber
