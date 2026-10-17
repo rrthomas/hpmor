@@ -1,14 +1,14 @@
 # Harry Potter and the Methods Of Rationality
 
-<https://github.com/rrthomas/hpmor>
-Maintainer: Reuben Thomas <rrt@sc3d.org>
+<https://github.com/hpmor-book/hpmor>
+Maintainer: Torben Menke
 
 A LaTeX version of [the popular didactic fan-fiction](https://www.hpmor.com)
 by Eliezer Yudkowsky, which can make e-books in PDF, ePub and Mobi formats,
 and six PDF volumes that can be printed and bound. There are also dust
 jackets for the printable volumes.
 
-See [latest release](https://github.com/rrthomas/hpmor/releases/latest)
+See [latest release](https://github.com/hpmor-book/hpmor/releases/latest)
 for PDF and e-book downloads.
 
 TeXLive 2015 or later and git are required to build the book. (Note: the
