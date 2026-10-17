@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
     # stray </div> leftover
     cont = re.sub(
-        r"(github.com/rrthomas/hpmor/</a></p>)\s+</div>",
+        r"(github.com/hpmor-book/hpmor/</a></p>)\s+</div>",
         r"\1",
         cont,
         flags=re.DOTALL | re.IGNORECASE,
