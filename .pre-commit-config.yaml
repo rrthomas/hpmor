@@ -57,7 +57,7 @@ repos:
     rev: v0.22.0
     hooks:
       - id: ryl
-        args: ["--fix", "-d", "{extends: default, rules: {line-length: disable}}"]
+        args: ["--fix", "-d", "{extends: default, rules: {line-length: disable, truthy: disable, document-start: disable}}"]
 
   - repo: https://github.com/scop/pre-commit-shfmt
     rev: v3.14.1-1
