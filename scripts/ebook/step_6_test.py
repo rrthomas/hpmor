@@ -25,6 +25,9 @@ test_cases = [
     # emph
     ("foo</em>…bar", "foo</em>… bar"),
     ("foo…<em>bar", "foo… <em>bar"),
+    ("foo</em>…”", "foo</em>…”"),
+    ("foo</em>…)", "foo</em>…)"),
+    ("foo</em>…<em>bar", "foo</em>… <em>bar"),
 ]
 
 

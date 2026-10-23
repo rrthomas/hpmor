@@ -43,7 +43,7 @@ def fix_ellipsis(s: str) -> str:
     # after punctuation: add space
     s = re.sub(r"(?<=[\.\?!:,;])…", r" …", s)
     # fine-tuning </em>… and …<em>
-    s = re.sub(r"(?<=</em>)…", "… ", s)
+    s = re.sub(r"(?<=</em>)…(?=\w)", "… ", s)
     s = re.sub(r"…(?=<em>)", "… ", s)
     # before opening EN-quotes: add space
     s = re.sub(r"…(?=[“])", "… ", s)
